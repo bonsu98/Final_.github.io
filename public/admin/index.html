@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Swiss Peptides Admin Redirect</title>
+  <script>
+    // Robust root-relative or subdirectory-relative redirect to parent with hash route
+    var currentPath = window.location.pathname;
+    // Normalize path by removing trailing slash if there is one
+    if (currentPath.endsWith('/')) {
+      currentPath = currentPath.slice(0, -1);
+    }
+    // Get parent path (remove '/admin' from end)
+    var parentPath = currentPath.substring(0, currentPath.lastIndexOf('/admin'));
+    if (!parentPath) {
+      parentPath = '/';
+    } else if (!parentPath.endsWith('/')) {
+      parentPath += '/';
+    }
+    // Redirect to parent path with the correct search/hash route
+    window.location.replace(window.location.protocol + '//' + window.location.host + parentPath + '#/admin');
+  </script>
+</head>
+<body>
+  Redirecting to Admin Portal...
+</body>
+</html>
