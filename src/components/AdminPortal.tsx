@@ -5,7 +5,8 @@ import {
   Plus, Edit, Trash2, Check, RefreshCw, Layers, ShieldCheck, 
   Tag, Image as ImageIcon, FileText, ChevronRight, DollarSign, 
   Beaker, CheckCircle2, ShoppingBag, X, Search, FileCheck, HelpCircle,
-  Users, Mail, Phone, MapPin, User, Settings, Lock, Eye, CheckCircle, Flame, AlertCircle
+  Users, Mail, Phone, MapPin, User, Settings, Lock, Eye, CheckCircle, Flame, AlertCircle,
+  MessageSquare
 } from 'lucide-react';
 
 interface AdminPortalProps {
@@ -184,6 +185,14 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
 
   const [channelSuccessMsg, setChannelSuccessMsg] = useState('');
   const [reviewsTrigger, setReviewsTrigger] = useState(0);
+
+  // WhatsApp & Telegram Chat Widget config states
+  const [whatsappNumber, setWhatsappNumber] = useState(() => {
+    return localStorage.getItem('peps_whatsapp_number') || '+61 488 856 783';
+  });
+  const [telegramUsername, setTelegramUsername] = useState(() => {
+    return localStorage.getItem('peps_telegram_username') || 'BuyPeptidesAustralia';
+  });
 
   // 3. USER ACCOUNTS STATES
   const [users, setUsers] = useState<any[]>([]);
@@ -1878,6 +1887,65 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                     className="w-full py-3 bg-[#DE5246] hover:bg-black text-white rounded-xl text-xs font-mono font-bold uppercase transition-all shadow cursor-pointer text-center"
                   >
                     Save & Update PAYID Details
+                  </button>
+                </form>
+              </div>
+
+              {/* CHAT WIDGET DIRECT LINKS CUSTOMIZER CARD */}
+              <div id="admin-chat-customizer" className="bg-white rounded-xl border border-gray-150 p-6 space-y-4 shadow-3xs text-left">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#DE5246]/10 flex items-center justify-center text-[#DE5246]">
+                    <MessageSquare className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight font-sans">Live Chat Widget Setup</h3>
+                    <p className="text-[10px] text-gray-400">Configure floating chat links of WhatsApp & Telegram accounts.</p>
+                  </div>
+                </div>
+
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  localStorage.setItem('peps_whatsapp_number', whatsappNumber.trim());
+                  localStorage.setItem('peps_telegram_username', telegramUsername.trim());
+                  setChannelSuccessMsg("WhatsApp & Telegram Floating chat channels updated successfully!");
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  setTimeout(() => setChannelSuccessMsg(""), 4000);
+                }} className="space-y-4 font-sans text-xs">
+                  <div className="space-y-1">
+                    <label className="text-gray-500 text-[9px] uppercase font-bold block">WhatsApp Dynamic Number or URL Link</label>
+                    <input
+                      type="text"
+                      required
+                      value={whatsappNumber}
+                      onChange={(e) => setWhatsappNumber(e.target.value)}
+                      className="w-full bg-[#FAF9F5] border border-gray-150 p-2.5 rounded-xl text-xs font-mono"
+                      placeholder="e.g. +61 488 856 783"
+                    />
+                    <p className="text-[9px] text-gray-400">
+                      Enter full international phone format (e.g. <code>+61 488 856 783</code>) or a direct wa.me link.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-gray-500 text-[9px] uppercase font-bold block">Telegram Username or URL Link</label>
+                    <input
+                      type="text"
+                      required
+                      value={telegramUsername}
+                      onChange={(e) => setTelegramUsername(e.target.value)}
+                      className="w-full bg-[#FAF9F5] border border-gray-150 p-2.5 rounded-xl text-xs font-mono"
+                      placeholder="e.g. BuyPeptidesAustralia"
+                    />
+                    <p className="text-[9px] text-gray-400">
+                      Enter username (e.g. <code>BuyPeptidesAustralia</code>) or full t.me invitation link.
+                    </p>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3 bg-gray-900 hover:bg-black text-white rounded-xl text-xs font-mono font-bold uppercase transition-all shadow cursor-pointer text-center"
+                  >
+                    Save & Publish Floating Support Channels
                   </button>
                 </form>
               </div>

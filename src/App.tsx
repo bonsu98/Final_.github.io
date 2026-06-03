@@ -15,6 +15,7 @@ import AdminPortal from './components/AdminPortal';
 import CartPage from './components/CartPage';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import RefundPolicy from './components/RefundPolicy';
+import ChatWidget from './components/ChatWidget';
 import { PRODUCTS, MOCK_COAS } from './mockData';
 import { CheckCircle, Check } from 'lucide-react';
 
@@ -1480,6 +1481,9 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Floating direct multichat live support desk widget */}
+      <ChatWidget />
     </div>
   );
 }
