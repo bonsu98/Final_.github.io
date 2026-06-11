@@ -12,7 +12,7 @@ export default function ContactPage() {
   const contactTitle = localStorage.getItem('peps_contact_title') || 'Contact Us';
   const contactDescription = localStorage.getItem('peps_contact_description') || 'For any questions, product inquiries, or support regarding peptides, feel free to contact us for prompt assistance.';
   const contactAddress = localStorage.getItem('peps_contact_address') || '17 South Terrace, Cowell, SA 5602';
-  const contactEmail = localStorage.getItem('peps_order_email') || 'mail@buypeptidesaustralia.com';
+  const contactEmail = localStorage.getItem('peps_order_email') || 'mail@buyswisspeptides.shop';
   const contactPhone = localStorage.getItem('peps_contact_phone') || '+61 488 856 783';
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -26,7 +26,7 @@ Standard courier deliveries usually resolve within 2 - 5 business days across ma
 Due to safety, security, and the strict temperature control standards required to preserve raw chemical compounds, we cannot accept physical returns of opened or unsealed products.
 If you require an exchange or refund under our guarantee:
 - Do not utilize the reagent seals.
-- Contact our Support Desk on WhatsApp or Email at mail@buypeptidesaustralia.com within 14 days of receipt.
+- Contact our Support Desk on WhatsApp or Email at mail@buyswisspeptides.shop within 14 days of receipt.
 - Provide your order number, a summary of your inquiry, and photos or lab test results if applicable.
 
 4. Quick & Seamless Processing

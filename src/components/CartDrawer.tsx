@@ -132,8 +132,17 @@ export default function CartDrawer({
                       <div className="flex items-center justify-between pt-1">
                         <div className="flex items-center border border-gray-200 rounded bg-gray-50 overflow-hidden h-7">
                           <button
-                            onClick={() => onUpdateQuantity(item.product.id, -1)}
-                            className="p-1 px-2.5 hover:bg-gray-100 text-gray-500 hover:text-gray-950 transition-colors cursor-pointer"
+                            onClick={() => {
+                              if (item.quantity > 1) {
+                                onUpdateQuantity(item.product.id, -1);
+                              }
+                            }}
+                            disabled={item.quantity <= 1}
+                            className={`p-1 px-2.5 transition-colors ${
+                              item.quantity <= 1
+                                ? 'text-gray-300 cursor-not-allowed bg-gray-100/50'
+                                : 'text-gray-500 hover:text-gray-950 hover:bg-gray-100 cursor-pointer'
+                            }`}
                           >
                             <Minus className="w-3 h-3" />
                           </button>

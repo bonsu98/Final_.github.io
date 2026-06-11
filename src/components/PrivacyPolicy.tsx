@@ -42,7 +42,7 @@ export default function PrivacyPolicy() {
                 Who we are
               </h2>
               <p>
-                Our website address is: <span className="text-[#DE5246] underline font-medium">https://buypeptidesaustralia.com</span>
+                Our website address is: <span className="text-[#DE5246] underline font-medium">https://buyswisspeptides.shop</span>
               </p>
             </div>
 

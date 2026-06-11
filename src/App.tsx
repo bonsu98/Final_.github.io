@@ -299,6 +299,35 @@ export default function App() {
     setOrders(updatedOrders);
     localStorage.setItem('peps_au_orders', JSON.stringify(updatedOrders));
     
+    // Dispatch automated confirmation email immediately to configured Admin Receiver Email Address
+    const receiverEmail = localStorage.getItem('peps_order_email') || 'orders@buyswisspeptides.shop';
+    const smtpSettingsStr = localStorage.getItem('peps_smtp_settings');
+    let smtpConfig = null;
+    if (smtpSettingsStr) {
+      try {
+        smtpConfig = JSON.parse(smtpSettingsStr);
+      } catch (err) {
+        console.error("Failed to parse stored SMTP config settings", err);
+      }
+    }
+
+    fetch('/api/send-order-email', {
+      method: "POST",
+      headers: { "Content-Type" : "application/json" },
+      body: JSON.stringify({
+        order: completedOrder,
+        receiverEmail,
+        smtpConfig
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Automated order notification email dispatcher response:", data);
+    })
+    .catch(err => {
+      console.error("Critical error dispatching automated order notification:", err);
+    });
+
     setCart([]);
     localStorage.removeItem('peps_au_cart');
     setCheckoutSuccessOrder(completedOrder);
@@ -680,7 +709,7 @@ export default function App() {
                   Contact Us On WhatsApp: <span className="font-normal text-gray-950">+61 488 856 783</span>
                 </p>
                 <p>
-                  Email : <span className="font-normal text-gray-950">mail@buypeptidesaustralia.com</span>
+                  Email : <span className="font-normal text-gray-950">mail@buyswisspeptides.shop</span>
                 </p>
                 <p className="text-[#888888] font-normal">
                   For Payments and Quick Processing of your Order

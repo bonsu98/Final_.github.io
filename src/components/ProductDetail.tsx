@@ -739,7 +739,7 @@ export default function ProductDetail({
                   </p>
 
                   <p>
-                    Trusted suppliers like BuyPeptidesAustralia offer lab-grade verification, giving you the confidence that you're purchasing quality research peptides.
+                    Trusted suppliers like BuySwissPeptide offer lab-grade verification, giving you the confidence that you're purchasing quality research peptides.
                   </p>
 
                   <p>
@@ -747,7 +747,7 @@ export default function ProductDetail({
                   </p>
 
                   <p className="pb-4">
-                    Order now from <a href="https://buypeptidesaustralia.com" target="_blank" rel="noreferrer" className="text-[#DE5246] hover:underline font-bold">https://buypeptidesaustralia.com</a> and receive research-grade {product.name} with clear product details and lab verification to support your experiments.
+                    Order now from <a href="https://buyswisspeptides.shop" target="_blank" rel="noreferrer" className="text-[#DE5246] hover:underline font-bold">https://buyswisspeptides.shop</a> and receive research-grade {product.name} with clear product details and lab verification to support your experiments.
                   </p>
 
                   {/* Heading: What Is product ? */}
@@ -765,7 +765,7 @@ export default function ProductDetail({
                   </h2>
 
                   <p>
-                    Looking to buy {product.name} in Australia? Visit Peptides Australia (<a href="https://buypeptidesaustralia.com" target="_blank" rel="noreferrer" className="text-[#DE5246] hover:underline font-bold">https://buypeptidesaustralia.com</a>) for high-quality, research-grade {product.name} with verified purity and secure shipping.
+                    Looking to buy {product.name} in Australia? Visit Peptides Australia (<a href="https://buyswisspeptides.shop" target="_blank" rel="noreferrer" className="text-[#DE5246] hover:underline font-bold">https://buyswisspeptides.shop</a>) for high-quality, research-grade {product.name} with verified purity and secure shipping.
                   </p>
                 </>
               )}

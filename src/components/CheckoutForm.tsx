@@ -573,7 +573,7 @@ export default function CheckoutForm({
 
                 {paymentMethod === 'bank_transfer' && (
                   <div className="mt-2 ml-7 text-slate-800 text-[12px] font-medium leading-relaxed text-left animate-fade-in whitespace-pre-wrap">
-                    {localStorage.getItem('peps_payid_instructions') || 'Contact Us On WhatsApp : +61 488 856 783 Email : mail@buypeptidesaustralia.com For Payments and Quick Processing of your Order'}
+                    {localStorage.getItem('peps_payid_instructions') || 'Contact Us On WhatsApp : +61 488 856 783 Email : mail@buyswisspeptides.shop For Payments and Quick Processing of your Order'}
                   </div>
                 )}
               </div>

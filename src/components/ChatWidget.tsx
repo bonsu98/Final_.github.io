@@ -10,7 +10,7 @@ export default function ChatWidget() {
   useEffect(() => {
     // Fetch configuration from localStorage
     const storedWA = localStorage.getItem('peps_whatsapp_number') || '+61 488 856 783';
-    const storedTG = localStorage.getItem('peps_telegram_username') || 'BuyPeptidesAustralia';
+    const storedTG = localStorage.getItem('peps_telegram_username') || 'BuySwissPeptide';
     
     setWhatsappNumber(storedWA);
     setTelegramUsername(storedTG);
@@ -30,7 +30,7 @@ export default function ChatWidget() {
   useEffect(() => {
     const handleStorageChange = () => {
       const storedWA = localStorage.getItem('peps_whatsapp_number') || '+61 488 856 783';
-      const storedTG = localStorage.getItem('peps_telegram_username') || 'BuyPeptidesAustralia';
+      const storedTG = localStorage.getItem('peps_telegram_username') || 'BuySwissPeptide';
       setWhatsappNumber(storedWA);
       setTelegramUsername(storedTG);
     };

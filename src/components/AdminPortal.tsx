@@ -99,7 +99,7 @@ export default function AdminPortal({
 
   // 2. CHANNELS STATES (REVIEWS + CUSTOM RECEIVER EMAIL + CONTACT US CUSTOMIZATION)
   const [orderEmail, setOrderEmail] = useState(() => {
-    return localStorage.getItem('peps_order_email') || 'orders@buypeptidesaustralia.com';
+    return localStorage.getItem('peps_order_email') || 'orders@buyswisspeptides.shop';
   });
   const [contactTitle, setContactTitle] = useState(() => {
     return localStorage.getItem('peps_contact_title') || 'Contact Us';
@@ -114,12 +114,34 @@ export default function AdminPortal({
     return localStorage.getItem('peps_contact_phone') || '+61 488 856 783';
   });
   const [payidInstructions, setPayidInstructions] = useState(() => {
-    return localStorage.getItem('peps_payid_instructions') || 'Contact Us On WhatsApp : +61 488 856 783 Email : mail@buypeptidesaustralia.com For Payments and Quick Processing of your Order';
+    return localStorage.getItem('peps_payid_instructions') || 'Contact Us On WhatsApp : +61 488 856 783 Email : mail@buyswisspeptides.shop For Payments and Quick Processing of your Order';
   });
+
+  const [smtpHost, setSmtpHost] = useState(() => {
+    return localStorage.getItem('peps_smtp_host') || '';
+  });
+  const [smtpPort, setSmtpPort] = useState(() => {
+    return localStorage.getItem('peps_smtp_port') || '587';
+  });
+  const [smtpUser, setSmtpUser] = useState(() => {
+    return localStorage.getItem('peps_smtp_user') || '';
+  });
+  const [smtpPassword, setSmtpPassword] = useState(() => {
+    return localStorage.getItem('peps_smtp_password') || '';
+  });
+  const [smtpSecure, setSmtpSecure] = useState(() => {
+    return localStorage.getItem('peps_smtp_secure') === 'true';
+  });
+  const [smtpFromName, setSmtpFromName] = useState(() => {
+    return localStorage.getItem('peps_smtp_from_name') || 'Swiss Peptides Shop';
+  });
+  const [smtpTestEmail, setSmtpTestEmail] = useState('');
+  const [smtpTestResult, setSmtpTestResult] = useState<{ success?: boolean; error?: string; message?: string } | null>(null);
+  const [smtpTesting, setSmtpTesting] = useState(false);
 
   const [privacyEditorValue, setPrivacyEditorValue] = useState(() => {
     return localStorage.getItem('peps_privacy_content') || `Who we are
-Our website address is: https://buypeptidesaustralia.com
+Our website address is: https://buyswisspeptides.shop
 
 Comments
 When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor's IP address and browser user agent string to help spam detection.
@@ -168,7 +190,7 @@ Standard courier deliveries usually resolve within 2 - 5 business days across ma
 Due to safety, security, and the strict temperature control standards required to preserve raw chemical compounds, we cannot accept physical returns of opened or unsealed products.
 If you require an exchange or refund under our guarantee:
 - Do not utilize the reagent seals.
-- Contact our Support Desk on WhatsApp or Email at mail@buypeptidesaustralia.com within 14 days of receipt.
+- Contact our Support Desk on WhatsApp or Email at mail@buyswisspeptides.shop within 14 days of receipt.
 - Provide your order number, a summary of your inquiry, and photos or lab test results if applicable.
 
 4. Quick & Seamless Processing
@@ -191,7 +213,7 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
     return localStorage.getItem('peps_whatsapp_number') || '+61 488 856 783';
   });
   const [telegramUsername, setTelegramUsername] = useState(() => {
-    return localStorage.getItem('peps_telegram_username') || 'BuyPeptidesAustralia';
+    return localStorage.getItem('peps_telegram_username') || 'BuySwissPeptide';
   });
 
   // 3. USER ACCOUNTS STATES
@@ -666,6 +688,78 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
 
     setChannelSuccessMsg("Contact information has been published to the dynamic Contact Us page in real-time!");
     setTimeout(() => setChannelSuccessMsg(""), 4000);
+  };
+
+  const handleSaveSmtpSettings = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem('peps_smtp_host', smtpHost.trim());
+    localStorage.setItem('peps_smtp_port', smtpPort.trim());
+    localStorage.setItem('peps_smtp_user', smtpUser.trim());
+    localStorage.setItem('peps_smtp_password', smtpPassword.trim());
+    localStorage.setItem('peps_smtp_secure', String(smtpSecure));
+    localStorage.setItem('peps_smtp_from_name', smtpFromName.trim());
+
+    const smtpSettingsObj = {
+      host: smtpHost.trim(),
+      port: smtpPort.trim(),
+      user: smtpUser.trim(),
+      pass: smtpPassword.trim(),
+      secure: smtpSecure,
+      fromName: smtpFromName.trim()
+    };
+    localStorage.setItem('peps_smtp_settings', JSON.stringify(smtpSettingsObj));
+
+    setChannelSuccessMsg("SMTP Mail credentials successfully stored! You can run a connection test below.");
+    setTimeout(() => setChannelSuccessMsg(""), 4000);
+  };
+
+  const handleSendTestEmail = async () => {
+    if (!smtpTestEmail) {
+      setSmtpTestResult({ success: false, error: 'Please enter a valid receiver email address for testing.' });
+      return;
+    }
+    setSmtpTesting(true);
+    setSmtpTestResult(null);
+
+    const smtpSettingsObj = {
+      host: smtpHost.trim(),
+      port: smtpPort.trim(),
+      user: smtpUser.trim(),
+      pass: smtpPassword.trim(),
+      secure: smtpSecure,
+      fromName: smtpFromName.trim()
+    };
+
+    try {
+      const response = await fetch('/api/send-test-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          receiverEmail: smtpTestEmail.trim(),
+          smtpConfig: smtpSettingsObj
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok && data.success) {
+        setSmtpTestResult({
+          success: true,
+          message: data.message || 'Test email dispatched successfully! Check your inbox/spam directory.'
+        });
+      } else {
+        setSmtpTestResult({
+          success: false,
+          error: data.error || 'Server rejected SMTP connection or rejected authentication.'
+        });
+      }
+    } catch (err: any) {
+      setSmtpTestResult({
+        success: false,
+        error: err.toString() || 'Connection failed to reach /api/send-test-email endpoint.'
+      });
+    } finally {
+      setSmtpTesting(false);
+    }
   };
 
   // 4. RESTORED OP ACTIONS
@@ -1500,7 +1594,7 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                       value={orderEmail}
                       onChange={(e) => setOrderEmail(e.target.value)}
                       className="flex-grow bg-[#FAF9F5] border border-gray-150 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-[#DE5246] font-mono"
-                      placeholder="receiver-admin@Buypeptidesaustralia.com"
+                      placeholder="receiver-admin@Buyswisspeptides.shop"
                     />
                     <button
                       onClick={handlePublishContactInfo}
@@ -1512,6 +1606,67 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                   <p className="text-[9px] text-gray-400 leading-normal pt-1">
                     🎯 Fully Integrated: This email will serve as the actual notification destination for order receipts and visitor query dispatches across the platform in real time.
                   </p>
+                </div>
+              </div>
+
+              {/* Card A2: Behind-The-Scenes Mail Server Dispatcher Verification */}
+              <div className="bg-white rounded-xl border border-gray-150 p-6 space-y-4 shadow-3xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#DE5246]/10 flex items-center justify-center text-[#DE5246]">
+                    <Settings className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">📧 Automated Dispatcher Verification</h3>
+                    <p className="text-[10px] text-gray-400">Your mail server credentials are set up securely behind-the-scenes as environment variables.</p>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50/50 border border-amber-150 rounded-xl p-4 text-xs text-amber-900 space-y-2 font-sans">
+                  <p className="font-semibold flex items-center gap-1">🔒 Behind-the-Scenes Setup Active</p>
+                  <p className="leading-relaxed text-[11px] text-gray-650">
+                    To prevent dashboard clutter, your SMTP server credentials (host, port, user, pass) are safely stored as secrets in the system environment variables and are automatically applied.
+                  </p>
+                </div>
+
+                {/* Connection Test SubSection */}
+                <div className="pt-2 space-y-3">
+                  <span className="text-[#DE5246] text-[10px] uppercase font-black tracking-wider block">🧪 Send Mail Dispatcher Test</span>
+                  <p className="text-[11px] text-gray-500 leading-normal">
+                    Enter any email address below to test the automated order dispatcher. This checks if the behind-the-scenes credentials establish a clean, authenticated connection.
+                  </p>
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      value={smtpTestEmail}
+                      onChange={(e) => setSmtpTestEmail(e.target.value)}
+                      placeholder="Send dynamic test email to e.g. yours@gmail.com..."
+                      className="flex-grow bg-[#FAF9F5] border border-gray-150 p-2.5 rounded-xl text-xs font-mono focus:outline-none focus:ring-1 focus:ring-[#DE5246]"
+                    />
+                    <button
+                      type="button"
+                      disabled={smtpTesting}
+                      onClick={handleSendTestEmail}
+                      className="px-4 py-2 bg-gray-900 hover:bg-black disabled:bg-gray-400 text-white rounded-xl text-xs font-mono font-bold uppercase transition-all cursor-pointer"
+                    >
+                      {smtpTesting ? 'Testing...' : 'Test Delivery'}
+                    </button>
+                  </div>
+
+                  {smtpTestResult && (
+                    <div className={`p-3 rounded-lg border text-xs leading-relaxed font-sans flex items-start gap-2 ${
+                      smtpTestResult.success 
+                        ? 'bg-emerald-50 border-emerald-150 text-emerald-800' 
+                        : 'bg-rose-50 border-rose-150 text-rose-800'
+                    }`}>
+                      <div className="mt-0.5 font-bold">
+                        {smtpTestResult.success ? '✓' : '⚠'}
+                      </div>
+                      <div>
+                        <strong>{smtpTestResult.success ? 'Success:' : 'Test Failed:'}</strong>{' '}
+                        {smtpTestResult.success ? smtpTestResult.message : smtpTestResult.error}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -1547,7 +1702,7 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                         if (confirm("Reset Privacy Policy back to standard defaults? This will overwrite your current draft.")) {
                           localStorage.removeItem('peps_privacy_content');
                           setPrivacyEditorValue(`Who we are
-Our website address is: https://buypeptidesaustralia.com
+Our website address is: https://buyswisspeptides.shop
 
 Comments
 When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor's IP address and browser user agent string to help spam detection.
@@ -1635,7 +1790,7 @@ Standard courier deliveries usually resolve within 2 - 5 business days across ma
 Due to safety, security, and the strict temperature control standards required to preserve raw chemical compounds, we cannot accept physical returns of opened or unsealed products.
 If you require an exchange or refund under our guarantee:
 - Do not utilize the reagent seals.
-- Contact our Support Desk on WhatsApp or Email at mail@buypeptidesaustralia.com within 14 days of receipt.
+- Contact our Support Desk on WhatsApp or Email at mail@buyswisspeptides.shop within 14 days of receipt.
 - Provide your order number, a summary of your inquiry, and photos or lab test results if applicable.
 
 4. Quick & Seamless Processing
@@ -1877,7 +2032,7 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                         <span className="text-xs font-black text-gray-700 tracking-widest font-mono">PAYID</span>
                       </div>
                       <div className="mt-2 ml-7 text-slate-800 text-[11px] font-medium leading-relaxed whitespace-pre-wrap font-sans bg-[#FAF9F5] p-2.5 rounded border border-gray-100">
-                        {payidInstructions || 'Contact Us On WhatsApp : +61 488 856 783 Email : mail@buypeptidesaustralia.com For Payments and Quick Processing of your Order'}
+                        {payidInstructions || 'Contact Us On WhatsApp : +61 488 856 783 Email : mail@buyswisspeptides.shop For Payments and Quick Processing of your Order'}
                       </div>
                     </div>
                   </div>
@@ -1934,10 +2089,10 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                       value={telegramUsername}
                       onChange={(e) => setTelegramUsername(e.target.value)}
                       className="w-full bg-[#FAF9F5] border border-gray-150 p-2.5 rounded-xl text-xs font-mono"
-                      placeholder="e.g. BuyPeptidesAustralia"
+                      placeholder="e.g. BuySwissPeptide"
                     />
                     <p className="text-[9px] text-gray-400">
-                      Enter username (e.g. <code>BuyPeptidesAustralia</code>) or full t.me invitation link.
+                      Enter username (e.g. <code>BuySwissPeptide</code>) or full t.me invitation link.
                     </p>
                   </div>
 

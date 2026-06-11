@@ -4,7 +4,7 @@ import { Trash2, ChevronDown, ChevronUp, ArrowLeft } from 'lucide-react';
 
 interface CartPageProps {
   cart: CartItem[];
-  onUpdateQuantity: (productId: string, newQuantity: number) => void;
+  onUpdateQuantity: (productId: string, delta: number) => void;
   onRemoveItem: (productId: string) => void;
   onCheckoutClick: () => void;
   onBackToCatalog: () => void;
@@ -134,12 +134,14 @@ export default function CartPage({
                           type="button"
                           onClick={() => {
                             if (item.quantity > 1) {
-                              onUpdateQuantity(item.product.id, item.quantity - 1);
-                            } else {
-                              onRemoveItem(item.product.id);
+                              onUpdateQuantity(item.product.id, -1);
                             }
                           }}
-                          className="px-2.5 h-full hover:bg-gray-50 text-gray-400 hover:text-black transition-colors flex items-center justify-center font-bold text-xs cursor-pointer select-none"
+                          className={`px-2.5 h-full transition-colors flex items-center justify-center font-bold text-xs select-none ${
+                            item.quantity <= 1 
+                              ? 'text-gray-300 cursor-not-allowed bg-gray-50' 
+                              : 'text-gray-400 hover:text-black hover:bg-gray-50 cursor-pointer'
+                          }`}
                         >
                           –
                         </button>
@@ -150,7 +152,7 @@ export default function CartPage({
 
                         <button
                           type="button"
-                          onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => onUpdateQuantity(item.product.id, 1)}
                           className="px-3 h-full hover:bg-gray-50 text-gray-400 hover:text-black transition-colors flex items-center justify-center font-bold text-xs cursor-pointer select-none"
                         >
                           +
