@@ -136,7 +136,7 @@ export default function AdminPortal({
     return localStorage.getItem('peps_smtp_from_name') || 'Swiss Peptides Shop';
   });
   const [smtpTestEmail, setSmtpTestEmail] = useState('');
-  const [smtpTestResult, setSmtpTestResult] = useState<{ success?: boolean; error?: string; message?: string } | null>(null);
+  const [smtpTestResult, setSmtpTestResult] = useState<{ success?: boolean; error?: string; message?: string; helper?: string } | null>(null);
   const [smtpTesting, setSmtpTesting] = useState(false);
 
   const [privacyEditorValue, setPrivacyEditorValue] = useState(() => {
@@ -749,7 +749,8 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
       } else {
         setSmtpTestResult({
           success: false,
-          error: data.error || 'Server rejected SMTP connection or rejected authentication.'
+          error: data.error || 'Server rejected SMTP connection or rejected authentication.',
+          helper: data.helper
         });
       }
     } catch (err: any) {
@@ -1653,18 +1654,27 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                   </div>
 
                   {smtpTestResult && (
-                    <div className={`p-3 rounded-lg border text-xs leading-relaxed font-sans flex items-start gap-2 ${
+                    <div className={`p-4 rounded-xl border text-xs leading-relaxed font-sans flex flex-col gap-2 ${
                       smtpTestResult.success 
                         ? 'bg-emerald-50 border-emerald-150 text-emerald-800' 
                         : 'bg-rose-50 border-rose-150 text-rose-800'
                     }`}>
-                      <div className="mt-0.5 font-bold">
-                        {smtpTestResult.success ? '✓' : '⚠'}
+                      <div className="flex items-start gap-2">
+                        <div className="mt-0.5 font-bold">
+                          {smtpTestResult.success ? '✓' : '⚠'}
+                        </div>
+                        <div>
+                          <strong>{smtpTestResult.success ? 'Success:' : 'Test Failed:'}</strong>{' '}
+                          {smtpTestResult.success ? smtpTestResult.message : smtpTestResult.error}
+                        </div>
                       </div>
-                      <div>
-                        <strong>{smtpTestResult.success ? 'Success:' : 'Test Failed:'}</strong>{' '}
-                        {smtpTestResult.success ? smtpTestResult.message : smtpTestResult.error}
-                      </div>
+                      
+                      {!smtpTestResult.success && smtpTestResult.helper && (
+                        <div className="mt-2 pt-2 border-t border-rose-150/50 text-[11px] text-rose-950 font-sans leading-relaxed">
+                          <p className="font-bold uppercase tracking-wider text-[9px] text-rose-800 mb-1">💡 Troubleshooting Guideline:</p>
+                          {smtpTestResult.helper}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

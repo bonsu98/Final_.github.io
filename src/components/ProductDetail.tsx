@@ -23,7 +23,7 @@ export default function ProductDetail({
   const [selectedDosage, setSelectedDosage] = useState<string>('');
   const [selectedVialCount, setSelectedVialCount] = useState<string>('');
   const [showOptionError, setShowOptionError] = useState<boolean>(false);
-  const [addQty, setAddQty] = useState<number>(6); // Default matching user image
+  const [addQty, setAddQty] = useState<number>(1); // Set default starting quantity to 1 as requested
   const [activeTab, setActiveTab] = useState<'description' | 'reviews'>('description');
   const [selectedMedia, setSelectedMedia] = useState<'vial' | 'certificate' | 'chromatogram' | 'massspec'>('vial');
 

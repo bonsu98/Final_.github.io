@@ -33,6 +33,29 @@ export default function ContactPage() {
     } catch (err) {
       console.error('Failed to save contact submission', err);
     }
+
+    // Call behind-the-scenes server-side SMTP dispatcher
+    fetch('/api/send-contact-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        subject,
+        message,
+        receiverEmail: contactEmail
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('Contact inquiry dispatch state:', data);
+    })
+    .catch(err => {
+      console.error('Failed to dispatch contact email notification through server:', err);
+    });
+
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);

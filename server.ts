@@ -243,18 +243,36 @@ async function startServer() {
         html: htmlBody
       };
 
-      const info = await transporter.sendMail(mailOptions);
-      console.log("Real SMTP Order notification sent successfully! MessageId:", info.messageId);
-      
-      return res.json({
-        success: true,
-        messageId: info.messageId,
-        message: "Order placed and email notification sent successfully to receiver email address!"
-      });
+      try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Real SMTP Order notification sent successfully! MessageId:", info.messageId);
+        
+        return res.json({
+          success: true,
+          messageId: info.messageId,
+          message: "Order placed and email notification sent successfully to receiver email address!"
+        });
+      } catch (mailError: any) {
+        console.error("SMTP sending failed for order notification:", mailError);
+        let helperText = "";
+        
+        if (mailError.message && (mailError.message.includes('BadCredentials') || mailError.message.includes('535-5.7.8') || mailError.message.includes('Username and Password not accepted'))) {
+          helperText = "GMAIL AUTO-DISPATCH REJECTED: Google blocked authentication. If using 'smtp.gmail.com', you MUST generate and use a 16-character 'App Password' instead of your regular Google password! (To do this: Enable 2-Step Verification in your Gmail account, then visit Security -> 'App Passwords' to generate a 16-character code).";
+        } else {
+          helperText = "Check that your SMTP mail host, port, username, and password in the Secrets/Settings are correct and authorized.";
+        }
+
+        return res.json({
+          success: false,
+          error: mailError.message,
+          helper: helperText,
+          message: "Order details received, but email notification dispatch failed."
+        });
+      }
 
     } catch (error: any) {
       console.error("Error dispatching order notification email:", error);
-      return res.status(500).json({
+      return res.status(200).json({
         success: false,
         error: error.message || "Internal server error during email dispatch."
       });
@@ -317,9 +335,167 @@ async function startServer() {
 
     } catch (error: any) {
       console.error("SMTP Test failed with error:", error);
-      return res.status(500).json({
+      let helperText = "";
+      
+      if (error.message && (error.message.includes('BadCredentials') || error.message.includes('535-5.7.8') || error.message.includes('Username and Password not accepted'))) {
+        helperText = "GMAIL LOGIN REJECTED: Google blocked authentication. If you are using GMail (smtp.gmail.com), you MUST generate and use a 16-character 'App Password' instead of your regular Google password! (To do this: Enable 2-Step Verification in your Gmail account settings, then visit Security -> 'App Passwords' to generate a 16-character code).";
+      } else {
+        helperText = "Please double check your server secrets settings (SMTP Host, SMTP Port, SMTP Username/User, SMTP Password/Pass) to ensure they are accurate and authorized by your mail provider.";
+      }
+
+      return res.status(200).json({
         success: false,
-        error: error.message || "Failed to establish a connection or authenticate the SMTP server details."
+        error: error.message || "Failed to establish a connection or authenticate the SMTP server details.",
+        helper: helperText
+      });
+    }
+  });
+
+  // Send Contact Message Email Endpoint
+  app.post("/api/send-contact-email", async (req, res) => {
+    try {
+      const { name, email, subject, message, receiverEmail } = req.body;
+
+      if (!name || !email || !subject || !message) {
+        return res.status(400).json({ success: false, error: "Please fill out all mandatory contact fields." });
+      }
+
+      const destination = receiverEmail || 'orders@buyswisspeptides.shop';
+      
+      const smtpSettingsStr = process.env.SMTP_HOST ? null : ""; // we check if env is set, or if we need configuration
+      const transporter = createTransporter(null);
+
+      const htmlBody = `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #FAF9F5; padding: 40px 15px; text-align: center;">
+          <div style="max-w: 600px; margin: 0 auto; background-color: #FFFFFF; border-radius: 12px; border: 1.5px solid #E2E8F0; width: 100%; text-align: left; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+            
+            <!-- Header -->
+            <div style="background-color: #0E1B2C; padding: 25px; text-align: center;">
+              <h1 style="color: #FFFFFF; font-size: 20px; font-weight: 800; letter-spacing: 1px; margin: 0 0 5px 0; font-family: sans-serif;">SWISS PEPTIDES CONTACT</h1>
+              <p style="color: #DE5246; font-size: 11px; font-weight: bold; letter-spacing: 1.5px; margin: 0; text-transform: uppercase;">NEW CUSTOMER INQUIRY</p>
+            </div>
+            
+            <!-- Details -->
+            <div style="padding: 24px; border-bottom: 1.5px solid #F1F1F0; background-color: #FAFBFD;">
+              <h3 style="margin-top: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; color: #0E1B2C; margin-bottom: 12px; font-family: sans-serif;">Sender Details</h3>
+              <table style="width: 100%; font-size: 13px; line-height: 1.5; color: #334155;">
+                <tr>
+                  <td style="padding: 3px 0; font-weight: bold; width: 110px; color: #64748B;">Name:</td>
+                  <td style="padding: 3px 0; color: #0E1B2C; font-weight: 600;">${name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 3px 0; font-weight: bold; color: #64748B;">Email:</td>
+                  <td style="padding: 3px 0;"><a href="mailto:${email}" style="color: #DE5246; text-decoration: none;">${email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 3px 0; font-weight: bold; color: #64748B;">Subject:</td>
+                  <td style="padding: 3px 0; color: #0E1B2C; font-weight: bold;">${subject}</td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- Message Body -->
+            <div style="padding: 24px;">
+              <h3 style="margin-top: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; color: #0E1B2C; margin-bottom: 12px; font-family: sans-serif;">Message</h3>
+              <div style="background-color: #F8FAFC; border: 1.5px solid #E2E8F0; padding: 20px; border-radius: 8px; font-size: 13px; color: #1E293B; line-height: 1.6; white-space: pre-wrap;">${message}</div>
+            </div>
+
+            <!-- Footer -->
+            <div style="background-color: #F8FAFC; padding: 25px 20px; text-align: center; border-top: 1.5px solid #E2E8F0; font-size: 11px; color: #64748B;">
+              <p style="margin: 0 0 6px 0; font-weight: bold; color: #475569; letter-spacing: 0.5px;">SWISS PEPTIDES SHOP</p>
+              <p style="margin: 0; line-height: 1.4;">This automated contact form inquiry was dispatched to the central administration receiver email. You can reply directly to the customer at <a href="mailto:${email}" style="color:#DE5246; text-decoration:none;">${email}</a>.</p>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      if (!transporter) {
+        console.warn("=================================================");
+        console.warn("NO SMTP SET UP FOR CONTACT ENQUIRIES. PRINTING:");
+        console.warn(`SENDER: ${name} (${email})`);
+        console.warn(`SUBJECT: ${subject}`);
+        console.warn("=================================================");
+
+        // Fallback or Test Account
+        try {
+          const testAccount = await nodemailer.createTestAccount();
+          const testTransporter = nodemailer.createTransport({
+            host: testAccount.smtp.host,
+            port: testAccount.smtp.port,
+            secure: testAccount.smtp.secure,
+            auth: {
+              user: testAccount.user,
+              pass: testAccount.pass
+            }
+          });
+
+          const testInfo = await testTransporter.sendMail({
+            from: `"Swiss Peptides Fallback" <${testAccount.user}>`,
+            to: destination,
+            subject: `[Fallback Contact] ${subject}`,
+            html: htmlBody
+          });
+
+          const testUrl = nodemailer.getTestMessageUrl(testInfo);
+          return res.json({
+            success: true,
+            warning: "Real SMTP was not configured. Contact inquiry routed via transient SMTP sandbox.",
+            sandboxUrl: testUrl,
+            message: "Message received in simulation environment!"
+          });
+        } catch {
+          return res.json({
+            success: true,
+            warning: "No SMTP config configured.",
+            message: "Inquiry stored locally"
+          });
+        }
+      }
+
+      const senderName = process.env.SMTP_SENDER_NAME || "Swiss Peptides Portal";
+      const senderAddress = process.env.SMTP_USER || "no-reply@buyswisspeptides.shop";
+
+      const mailOptions = {
+        from: `"${senderName}" <${senderAddress}>`,
+        to: destination,
+        subject: `✉️ New Contact Inquiry: ${subject}`,
+        replyTo: email,
+        html: htmlBody
+      };
+
+      try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Real SMTP Contact notification sent successfully! MessageId:", info.messageId);
+
+        return res.json({
+          success: true,
+          messageId: info.messageId,
+          message: "Message sent successfully to receiver email address!"
+        });
+      } catch (mailError: any) {
+        console.error("Contact form SMTP send failed:", mailError);
+        let helperText = "";
+        
+        if (mailError.message && (mailError.message.includes('BadCredentials') || mailError.message.includes('535-5.7.8') || mailError.message.includes('Username and Password not accepted'))) {
+          helperText = "GMAIL LOGIN REJECTED: Google blocked authentication. If using 'smtp.gmail.com', you MUST generate and use a 16-character 'App Password' instead of your regular Google password! (To do this: Enable 2-Step Verification in your Gmail account settings, then visit Security -> 'App Passwords' to generate a 16-character code).";
+        } else {
+          helperText = "Please double check your server secrets settings (SMTP Host, SMTP Port, SMTP Username/User, SMTP Password/Pass) to ensure they are accurate and authorized by your mail provider.";
+        }
+
+        return res.json({
+          success: false,
+          error: mailError.message,
+          helper: helperText,
+          message: "Inquiry received locally, but notification email dispatch failed due to server SMTP credential issues."
+        });
+      }
+
+    } catch (error: any) {
+      console.error("Error dispatching contact email:", error);
+      return res.status(200).json({
+        success: false,
+        error: error.message || "Internal server error during contact email dispatch."
       });
     }
   });
