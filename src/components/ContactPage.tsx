@@ -78,7 +78,7 @@ export default function ContactPage() {
       <div 
         className="relative h-[480px] w-full flex items-center justify-center bg-fixed bg-cover bg-center overflow-hidden"
         style={{ 
-          backgroundImage: "url('/src/assets/images/contact_us_bg_1780051503388.png')",
+          backgroundImage: "url('./src/assets/images/contact_us_bg_1780051503388.png')",
         }}
       >
         {/* Dark overlay matching the uploaded reference image perfectly */}

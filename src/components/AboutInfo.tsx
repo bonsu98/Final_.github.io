@@ -10,7 +10,7 @@ export default function AboutInfo({ onShop }: AboutInfoProps) {
       {/* Hero Banner matching the requested image design with parallax scrolling */}
       <div 
         className="relative h-[240px] md:h-[350px] w-full bg-cover bg-center bg-no-repeat bg-fixed flex items-center justify-center"
-        style={{ backgroundImage: 'url("/src/assets/images/about_banner_1780347239092.png")' }}
+        style={{ backgroundImage: 'url("./src/assets/images/about_banner_1780347239092.png")' }}
       >
         {/* Darkening overlays for elite contrast as shown in user's image */}
         <div className="absolute inset-0 bg-slate-900/40" />

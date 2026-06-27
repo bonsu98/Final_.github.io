@@ -172,7 +172,7 @@ export default function CheckoutForm({
           <div className="flex flex-col h-full bg-white rounded-lg overflow-hidden group">
             <div className="aspect-square w-full bg-gray-50 border border-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
               <img 
-                src="/src/assets/images/retatrutide_best_1780030958269.png" 
+                src="./src/assets/images/retatrutide_best_1780030958269.png" 
                 alt="Retratrutide Pen"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 referrerPolicy="no-referrer"
@@ -195,7 +195,7 @@ export default function CheckoutForm({
           <div className="flex flex-col h-full bg-white rounded-lg overflow-hidden group">
             <div className="aspect-square w-full bg-gray-50 border border-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
               <img 
-                src="/src/assets/images/tirzepatide_best_1780031041817.png" 
+                src="./src/assets/images/tirzepatide_best_1780031041817.png" 
                 alt="Mounjaro"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 referrerPolicy="no-referrer"
@@ -219,7 +219,7 @@ export default function CheckoutForm({
           <div className="flex flex-col h-full bg-white rounded-lg overflow-hidden group">
             <div className="aspect-square w-full bg-gray-50 border border-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
               <img 
-                src="/src/assets/images/wegovy_pens_background_1780029483639.png" 
+                src="./src/assets/images/wegovy_pens_background_1780029483639.png" 
                 alt="Wegovy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 referrerPolicy="no-referrer"
@@ -243,7 +243,7 @@ export default function CheckoutForm({
           <div className="flex flex-col h-full bg-white rounded-lg overflow-hidden group">
             <div className="aspect-square w-full bg-gray-50 border border-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
               <img 
-                src="/src/assets/images/ghk_cu_best_1780031016475.png" 
+                src="./src/assets/images/ghk_cu_best_1780031016475.png" 
                 alt="Cagrilintide + Semaglutide"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 referrerPolicy="no-referrer"

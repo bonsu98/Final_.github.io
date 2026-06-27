@@ -21,19 +21,19 @@ interface AdminPortalProps {
 }
 
 const PRELOADED_SWISS_IMAGES = [
-  { path: "/src/assets/images/retatrutide_best_1780030958269.png", label: "Retatrutide Premium Formulation" },
-  { path: "/src/assets/images/mots_c_best_1780030979501.png", label: "MOTS-C Peptide Specimen" },
-  { path: "/src/assets/images/hgh_191_best_1780030996215.png", label: "HGH 191 AA 97% Purity Vial" },
-  { path: "/src/assets/images/ghk_cu_best_1780031016475.png", label: "GHK-CU Copper Elite" },
-  { path: "/src/assets/images/tirzepatide_best_1780031041817.png", label: "Tirzepatide Dual Incretin Vial" },
-  { path: "/src/assets/images/bpc157_tb500_best_1780031064715.png", label: "BPC157 + TB500 Recovery Blend" },
-  { path: "/src/assets/images/nad_10ml_best_1780031082396.png", label: "NAD+ 10ml Cellular Vial" },
-  { path: "/src/assets/images/igf1_lr3_best_1780031102244.png", label: "IGF-1 LR3 Growth Elite" },
-  { path: "/src/assets/images/melanotan2_best_1780031120375.png", label: "Melanotan 2 Skin Peptide" },
-  { path: "/src/assets/images/epithalon_best_1780031139756.png", label: "Epithalon Longevity Formulation" },
-  { path: "/src/assets/images/peptide_vials_hero_1780001932117.png", label: "Peptide Vials Laboratory Stack" },
-  { path: "/src/assets/images/peptides_info_vials_1780003530034.png", label: "Swiss Info Vials Background" },
-  { path: "/src/assets/images/wegovy_pens_background_1780029483639.png", label: "Wegovy Weight Management Pen Background" },
+  { path: "./src/assets/images/retatrutide_best_1780030958269.png", label: "Retatrutide Premium Formulation" },
+  { path: "./src/assets/images/mots_c_best_1780030979501.png", label: "MOTS-C Peptide Specimen" },
+  { path: "./src/assets/images/hgh_191_best_1780030996215.png", label: "HGH 191 AA 97% Purity Vial" },
+  { path: "./src/assets/images/ghk_cu_best_1780031016475.png", label: "GHK-CU Copper Elite" },
+  { path: "./src/assets/images/tirzepatide_best_1780031041817.png", label: "Tirzepatide Dual Incretin Vial" },
+  { path: "./src/assets/images/bpc157_tb500_best_1780031064715.png", label: "BPC157 + TB500 Recovery Blend" },
+  { path: "./src/assets/images/nad_10ml_best_1780031082396.png", label: "NAD+ 10ml Cellular Vial" },
+  { path: "./src/assets/images/igf1_lr3_best_1780031102244.png", label: "IGF-1 LR3 Growth Elite" },
+  { path: "./src/assets/images/melanotan2_best_1780031120375.png", label: "Melanotan 2 Skin Peptide" },
+  { path: "./src/assets/images/epithalon_best_1780031139756.png", label: "Epithalon Longevity Formulation" },
+  { path: "./src/assets/images/peptide_vials_hero_1780001932117.png", label: "Peptide Vials Laboratory Stack" },
+  { path: "./src/assets/images/peptides_info_vials_1780003530034.png", label: "Swiss Info Vials Background" },
+  { path: "./src/assets/images/wegovy_pens_background_1780029483639.png", label: "Wegovy Weight Management Pen Background" },
 ];
 
 interface AdminOrderRowProps {
@@ -1441,7 +1441,7 @@ Once reviewed, approved refunds will be credited back via PAYID or the original 
                           p.imageUrl === 'vial_teal' ? 'bg-[#ccfbf1] text-teal-700 border-teal-200' : 'bg-[#f1f5f9] text-slate-700 border-slate-200';
 
                         // Find the representative display image
-                        const displayImg = p.images && p.images.length > 0 ? p.images[0] : (p.imageUrl.startsWith('/') ? p.imageUrl : '/src/assets/images/peptide_vials_hero_1780001932117.png');
+                        const displayImg = p.images && p.images.length > 0 ? p.images[0] : (p.imageUrl.startsWith('/') ? p.imageUrl : './src/assets/images/peptide_vials_hero_1780001932117.png');
 
                         return (
                           <div 

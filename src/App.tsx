@@ -24,61 +24,61 @@ const BEST_SELLERS = [
     id: "pep-retatrutide",
     name: "Retatrutide",
     priceRange: "$95.00 – $42,000.00",
-    image: "/src/assets/images/retatrutide_best_1780030958269.png"
+    image: "./src/assets/images/retatrutide_best_1780030958269.png"
   },
   {
     id: "pep-mots-c",
     name: "MOTS-C",
     priceRange: "$99.00 – $21,400.00",
-    image: "/src/assets/images/mots_c_best_1780030979501.png"
+    image: "./src/assets/images/mots_c_best_1780030979501.png"
   },
   {
     id: "pep-hgh-191aa",
     name: "HGH 191 AA 97%",
     priceRange: "$113.00 – $10,300.00",
-    image: "/src/assets/images/hgh_191_best_1780030996215.png"
+    image: "./src/assets/images/hgh_191_best_1780030996215.png"
   },
   {
     id: "pep-ghk-cu",
     name: "GHK-CU",
     priceRange: "$103.00 – $8,000.00",
-    image: "/src/assets/images/ghk_cu_best_1780031016475.png"
+    image: "./src/assets/images/ghk_cu_best_1780031016475.png"
   },
   {
     id: "pep-tirzepatide",
     name: "Tirzepatide",
     priceRange: "$57.00 – $25,700.00",
-    image: "/src/assets/images/tirzepatide_best_1780031041817.png"
+    image: "./src/assets/images/tirzepatide_best_1780031041817.png"
   },
   {
     id: "pep-bpc157-tb500",
     name: "BPC157 + TB500 Blend",
     priceRange: "$141.00 – $18,200.00",
-    image: "/src/assets/images/bpc157_tb500_best_1780031064715.png"
+    image: "./src/assets/images/bpc157_tb500_best_1780031064715.png"
   },
   {
     id: "pep-nad-10ml",
     name: "NAD+ (10ML)",
     priceRange: "$182.00 – $12,400.00",
-    image: "/src/assets/images/nad_10ml_best_1780031082396.png"
+    image: "./src/assets/images/nad_10ml_best_1780031082396.png"
   },
   {
     id: "pep-igf1-lr3",
     name: "IGF-1 LR3",
     priceRange: "$100.00 – $16,700.00",
-    image: "/src/assets/images/igf1_lr3_best_1780031102244.png"
+    image: "./src/assets/images/igf1_lr3_best_1780031102244.png"
   },
   {
     id: "pep-melanotan2",
     name: "melanotan 2",
     priceRange: "$155.00 – $6,000.00",
-    image: "/src/assets/images/melanotan2_best_1780031120375.png"
+    image: "./src/assets/images/melanotan2_best_1780031120375.png"
   },
   {
     id: "pep-epitalon",
     name: "Epithalon",
     priceRange: "$95.00 – $12,900.00",
-    image: "/src/assets/images/epithalon_best_1780031139756.png"
+    image: "./src/assets/images/epithalon_best_1780031139756.png"
   }
 ];
 
@@ -1052,7 +1052,7 @@ ${shippingString}
                       {/* Left: Beautiful clinical photo generated based on mockup */}
                       <div className="md:col-span-5 w-full overflow-hidden">
                         <img 
-                          src="/src/assets/images/peptides_info_vials_1780003530034.png" 
+                          src="./src/assets/images/peptides_info_vials_1780003530034.png" 
                           alt="Premium research peptide vials with sterile syringes" 
                           referrerPolicy="no-referrer"
                           loading="lazy"
@@ -1221,7 +1221,7 @@ ${shippingString}
                 <section 
                   className="relative min-h-[600px] md:min-h-[750px] flex items-center bg-black overflow-hidden bg-cover bg-center bg-scroll md:bg-fixed py-20"
                   style={{
-                    backgroundImage: "url('/src/assets/images/wegovy_pens_background_1780029483639.png')",
+                    backgroundImage: "url('./src/assets/images/wegovy_pens_background_1780029483639.png')",
                     backgroundColor: "#18181b", /* fallback solid background for instant mobile load */
                   }}
                 >
@@ -1297,7 +1297,7 @@ ${shippingString}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-5">
                           <div className="w-40 h-40 bg-white shadow-xs overflow-hidden shrink-0">
                             <img 
-                              src="/src/assets/images/peptides_info_vials_1780003530034.png" 
+                              src="./src/assets/images/peptides_info_vials_1780003530034.png" 
                               alt="Tirzepatide Swiss Price"
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"
@@ -1317,7 +1317,7 @@ ${shippingString}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-5">
                           <div className="w-40 h-40 bg-white shadow-xs overflow-hidden shrink-0">
                             <img 
-                              src="/src/assets/images/ghk_cu_best_1780031016475.png" 
+                              src="./src/assets/images/ghk_cu_best_1780031016475.png" 
                               alt="GHK - CU"
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"
@@ -1337,7 +1337,7 @@ ${shippingString}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-5">
                           <div className="w-40 h-40 bg-white shadow-xs overflow-hidden shrink-0">
                             <img 
-                              src="/src/assets/images/retatrutide_best_1780030958269.png" 
+                              src="./src/assets/images/retatrutide_best_1780030958269.png" 
                               alt="Retatrutide Price"
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"
