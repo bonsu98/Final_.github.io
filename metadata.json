@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Final1",
+  "description": "Premium Swiss Peptides certified analytical laboratory reagent supplier. Ultra-high 99%+ chromatogram-verified compounds and direct air express logistics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
