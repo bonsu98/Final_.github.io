@@ -26,9 +26,9 @@ export default function Hero({ onExploreClick, onVerifyClick, setActiveCategory 
             Swiss Peptides
           </h1>
 
-          <p style={{ fontSize: '14px' }} className="text-white font-sans tracking-wide max-w-2xl mx-auto leading-relaxed drop-shadow-sm opacity-90 font-medium">
+          <h2 style={{ fontSize: '14px' }} className="text-white font-sans tracking-wide max-w-2xl mx-auto leading-relaxed drop-shadow-sm opacity-90 font-medium">
             Looking To Buy Peptides? We Offer Top-Quality Peptides With Fast, Secure Shipping Across The Country. Shop Now For The Best In Health, Fitness, And Wellness!
-          </p>
+          </h2>
 
           <div className="pt-2">
             <button
