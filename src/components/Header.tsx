@@ -90,6 +90,16 @@ export default function Header({
               </button>
 
               <button
+                onClick={() => setActivePage('articles')}
+                style={navLinkStyle}
+                className={`transition-colors cursor-pointer hover:text-[#DE5246] ${
+                  activePage === 'articles' || activePage === 'article-detail' ? 'text-[#DE5246]' : 'text-gray-700'
+                }`}
+              >
+                Articles
+              </button>
+
+              <button
                 onClick={() => setActivePage('contact')}
                 style={navLinkStyle}
                 className={`transition-colors cursor-pointer hover:text-[#DE5246] ${
