@@ -22,7 +22,6 @@
     "nodemailer": "^8.0.11",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "react-helmet-async": "^2.0.5",
     "vite": "^6.2.3"
   },
   "devDependencies": {
