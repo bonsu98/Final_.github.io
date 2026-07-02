@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PageView, CartItem, Product, Order, UserProfile, COABatch } from './types';
+import { PageView, CartItem, Product, Order, UserProfile, COABatch, Article } from './types';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ShopCatalog from './components/ShopCatalog';
@@ -15,8 +15,10 @@ import AdminPortal from './components/AdminPortal';
 import CartPage from './components/CartPage';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import RefundPolicy from './components/RefundPolicy';
+import ArticleList from './components/ArticleList';
+import ArticleDetail from './components/ArticleDetail';
 import ChatWidget from './components/ChatWidget';
-import { PRODUCTS, MOCK_COAS } from './mockData';
+import { PRODUCTS, MOCK_COAS, ARTICLES } from './mockData';
 import { CheckCircle, Check } from 'lucide-react';
 
 const BEST_SELLERS = [
@@ -89,6 +91,7 @@ export default function App() {
   const [cartOpen, setCartOpen] = useState<boolean>(false);
   const [cartNotification, setCartNotification] = useState<{ productName: string } | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   // Core administrative states (Stateful Database)
   const [products, setProducts] = useState<Product[]>([]);
@@ -1459,6 +1462,23 @@ ${shippingString}
                 onRemoveItem={handleRemoveItem}
                 onCheckoutClick={() => setActivePage('checkout')}
                 onBackToCatalog={() => setActivePage('shop')}
+              />
+            )}
+
+            {activePage === 'articles' && (
+              <ArticleList 
+                articles={ARTICLES} 
+                onArticleClick={(article) => {
+                  setSelectedArticle(article);
+                  setActivePage('article-detail');
+                }} 
+              />
+            )}
+
+            {activePage === 'article-detail' && selectedArticle && (
+              <ArticleDetail 
+                article={selectedArticle} 
+                onBack={() => setActivePage('articles')} 
               />
             )}
 
