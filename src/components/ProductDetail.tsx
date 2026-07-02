@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Product, COABatch } from '../types';
 import { MapPin, Mail, Phone, ArrowLeft, Check, Star, ShieldCheck, AlertCircle, Info, CheckCircle2 } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
 
 interface ProductDetailProps {
   product: Product;
@@ -196,40 +195,57 @@ export default function ProductDetail({
   const isNadOrHighWeight = product.id === 'pep-nad' || product.id === 'pep-nad-10ml';
   const weightMg = isNadOrHighWeight ? 200 : (isNaN(vialMg) ? 10 : vialMg);
 
-  // Scroll to top on load
+  // Update SEO dynamically
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [product.id]);
+    document.title = `${product.name} | Swiss Peptides`;
+    
+    // Update Meta Description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", `Buy ${product.name} (${product.purity} purity). ${product.description}`);
+    }
+
+    // Update Meta Keywords
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute("content", `${product.name}, buy ${product.name}, research peptides, protein related to peptides, swisspeptides`);
+    }
+
+    // Inject JSON-LD Schema
+    const scriptId = 'product-schema-jsonld';
+    let script = document.getElementById(scriptId);
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify({
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": product.name,
+      "image": [`https://buyswisspetides.shop${product.imageUrl.replace('.', '')}`],
+      "description": product.description,
+      "sku": product.id,
+      "offers": {
+        "@type": "Offer",
+        "url": `https://buyswisspetides.shop/#${product.id}`,
+        "priceCurrency": "USD",
+        "price": product.price,
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock"
+      }
+    });
+
+    return () => {
+      // Cleanup schema on unmount to prevent duplicates if navigating between products
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) existingScript.remove();
+    };
+  }, [product]);
 
   return (
     <div className="bg-white pb-24 font-sans text-gray-800">
-      <Helmet>
-        <title>{product.name} | Swiss Peptides</title>
-        <meta name="description" content={`Buy ${product.name} (${product.purity} purity). ${product.description}`} />
-        <meta name="keywords" content={`${product.name}, buy ${product.name}, research peptides, protein related to peptides, swisspeptides`} />
-        
-        {/* JSON-LD Schema for Product */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": product.name,
-            "image": [
-              `https://buyswisspetides.shop${product.imageUrl.replace('.', '')}`
-            ],
-            "description": product.description,
-            "sku": product.id,
-            "offers": {
-              "@type": "Offer",
-              "url": `https://buyswisspetides.shop/#${product.id}`,
-              "priceCurrency": "USD",
-              "price": product.price,
-              "itemCondition": "https://schema.org/NewCondition",
-              "availability": "https://schema.org/InStock"
-            }
-          })}
-        </script>
-      </Helmet>
       
       {/* SECTION 1: Product Configurator & HPLC chromatogram report section (Exact image replica layout) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
