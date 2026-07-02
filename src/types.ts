@@ -89,4 +89,16 @@ export interface COABatch {
   hplcPeakData: { time: number; intensity: number }[];
 }
 
-export type PageView = 'home' | 'shop' | 'coas' | 'account' | 'docs' | 'about' | 'checkout' | 'admin' | 'contact' | 'product-detail' | 'cart' | 'privacy';
+export interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string; // Markdown or HTML
+  author: string;
+  publishDate: string;
+  imageUrl: string;
+  tags: string[];
+}
+
+export type PageView = 'home' | 'shop' | 'coas' | 'account' | 'docs' | 'about' | 'checkout' | 'admin' | 'contact' | 'product-detail' | 'cart' | 'privacy' | 'articles' | 'article-detail';
