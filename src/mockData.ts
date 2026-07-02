@@ -460,3 +460,59 @@ export const MEMORANDUM_FAQS = [
     a: "Our peptide reagents are lyophilized (freeze-dried) and extremely stable at standard ambient temperatures when kept sealed in anhydrous conditions. For added security, we ship in heat-buffered envelopes with insulated bubble shielding to prevent extreme thermal exposure during delivery."
   }
 ];
+
+import { Article } from './types';
+
+export const ARTICLES: Article[] = [
+  {
+    id: "art-1",
+    title: "Understanding Research Peptides: A Comprehensive Guide",
+    slug: "understanding-research-peptides",
+    excerpt: "Discover the fundamentals of research peptides, how they work, and why they are revolutionizing the scientific and health communities.",
+    content: `
+# Understanding Research Peptides: A Comprehensive Guide
+
+Peptides have become a cornerstone in modern biological research. But what exactly are they? In simple terms, peptides are short chains of amino acids, the building blocks of proteins. 
+
+## What Are Proteins Related to Peptides?
+When people ask about "proteins related to peptides," they are usually referring to the fact that both are made of the same materials: amino acids. The primary difference is size. Peptides typically contain between 2 and 50 amino acids, whereas proteins are much larger and more complex. 
+
+Because of their smaller size, peptides are easier for the body to absorb and utilize. They can penetrate the skin and intestines more readily, making them highly effective for targeted research applications.
+
+## Common Types of Research Peptides
+- **Pentadecapeptide (BPC-157):** Known for its remarkable healing properties in research models.
+- **GHK-Cu:** Often researched for its anti-aging and tissue remodeling effects.
+- **Tirzepatide & Retatrutide:** Currently at the forefront of metabolic and weight loss research.
+
+If you are looking to buy peptides online, it is crucial to source them from reputable providers who offer strict third-party HPLC testing, ensuring you receive 99%+ purity for your experiments.
+    `,
+    author: "Dr. Matthew Evans",
+    publishDate: "2026-06-15",
+    imageUrl: "./src/assets/images/peptide_vials_hero_1780001932117.png",
+    tags: ["Research Peptides", "Protein", "Guide"]
+  },
+  {
+    id: "art-2",
+    title: "What is a Pentadecapeptide? The Science Behind BPC-157",
+    slug: "what-is-pentadecapeptide-bpc-157",
+    excerpt: "Explore the fascinating science behind pentadecapeptides like BPC-157 and their potential applications in cellular healing and repair.",
+    content: `
+# What is a Pentadecapeptide?
+
+A **pentadecapeptide** is a peptide composed of exactly 15 amino acids. The most famous pentadecapeptide in scientific literature today is BPC-157 (Body Protection Compound 157). 
+
+## The Mechanism of Action
+Derived from a protective protein naturally found in the human stomach, this pentadecapeptide has demonstrated incredible regenerative capabilities in animal models. Researchers studying proteins related to peptides often look at BPC-157 to understand how short amino acid chains can influence systemic healing pathways, including:
+- Tendon and ligament repair
+- Gastrointestinal healing
+- Angiogenesis (the formation of new blood vessels)
+
+## Why Purity Matters
+When researching pentadecapeptides, molecular stability is key. Impure peptide sequences can lead to skewed experimental data. At Swiss Peptides, we ensure our BPC-157 is synthesized to exacting standards, routinely achieving over 99% purity.
+    `,
+    author: "Swiss Peptides Research Team",
+    publishDate: "2026-06-20",
+    imageUrl: "./src/assets/images/peptides_info_vials_1780003530034.png",
+    tags: ["Pentadecapeptide", "BPC-157", "Healing"]
+  }
+];
