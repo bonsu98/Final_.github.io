@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { PageView, CartItem, Product, Order, UserProfile, COABatch, Article } from './types';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import ShopCatalog from './components/ShopCatalog';
-import ProductDetail from './components/ProductDetail';
+const ShopCatalog = lazy(() => import('./components/ShopCatalog'));
+const ProductDetail = lazy(() => import('./components/ProductDetail'));
 import CartDrawer from './components/CartDrawer';
-import CheckoutForm from './components/CheckoutForm';
-import AccountPortal from './components/AccountPortal';
-import LabTests from './components/LabTests';
-import DocsPortal from './components/DocsPortal';
-import AboutInfo from './components/AboutInfo';
-import ContactPage from './components/ContactPage';
-import AdminPortal from './components/AdminPortal';
-import CartPage from './components/CartPage';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import RefundPolicy from './components/RefundPolicy';
-import ArticleList from './components/ArticleList';
-import ArticleDetail from './components/ArticleDetail';
+const CheckoutForm = lazy(() => import('./components/CheckoutForm'));
+const AccountPortal = lazy(() => import('./components/AccountPortal'));
+const LabTests = lazy(() => import('./components/LabTests'));
+const DocsPortal = lazy(() => import('./components/DocsPortal'));
+const AboutInfo = lazy(() => import('./components/AboutInfo'));
+const ContactPage = lazy(() => import('./components/ContactPage'));
+const AdminPortal = lazy(() => import('./components/AdminPortal'));
+const CartPage = lazy(() => import('./components/CartPage'));
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
+const RefundPolicy = lazy(() => import('./components/RefundPolicy'));
+const ArticleList = lazy(() => import('./components/ArticleList'));
+const ArticleDetail = lazy(() => import('./components/ArticleDetail'));
 import ChatWidget from './components/ChatWidget';
 import { PRODUCTS, MOCK_COAS, ARTICLES } from './mockData';
 import { CheckCircle, Check } from 'lucide-react';
@@ -25,61 +25,61 @@ const BEST_SELLERS = [
   {
     id: "pep-retatrutide",
     name: "Retatrutide",
-    priceRange: "$95.00 – $42,000.00",
+    priceRange: "$95.00 â€“ $42,000.00",
     image: "./src/assets/images/retatrutide_best_1780030958269.png"
   },
   {
     id: "pep-mots-c",
     name: "MOTS-C",
-    priceRange: "$99.00 – $21,400.00",
+    priceRange: "$99.00 â€“ $21,400.00",
     image: "./src/assets/images/mots_c_best_1780030979501.png"
   },
   {
     id: "pep-hgh-191aa",
     name: "HGH 191 AA 97%",
-    priceRange: "$113.00 – $10,300.00",
+    priceRange: "$113.00 â€“ $10,300.00",
     image: "./src/assets/images/hgh_191_best_1780030996215.png"
   },
   {
     id: "pep-ghk-cu",
     name: "GHK-CU",
-    priceRange: "$103.00 – $8,000.00",
+    priceRange: "$103.00 â€“ $8,000.00",
     image: "./src/assets/images/ghk_cu_best_1780031016475.png"
   },
   {
     id: "pep-tirzepatide",
     name: "Tirzepatide",
-    priceRange: "$57.00 – $25,700.00",
+    priceRange: "$57.00 â€“ $25,700.00",
     image: "./src/assets/images/tirzepatide_best_1780031041817.png"
   },
   {
     id: "pep-bpc157-tb500",
     name: "BPC157 + TB500 Blend",
-    priceRange: "$141.00 – $18,200.00",
+    priceRange: "$141.00 â€“ $18,200.00",
     image: "./src/assets/images/bpc157_tb500_best_1780031064715.png"
   },
   {
     id: "pep-nad-10ml",
     name: "NAD+ (10ML)",
-    priceRange: "$182.00 – $12,400.00",
+    priceRange: "$182.00 â€“ $12,400.00",
     image: "./src/assets/images/nad_10ml_best_1780031082396.png"
   },
   {
     id: "pep-igf1-lr3",
     name: "IGF-1 LR3",
-    priceRange: "$100.00 – $16,700.00",
+    priceRange: "$100.00 â€“ $16,700.00",
     image: "./src/assets/images/igf1_lr3_best_1780031102244.png"
   },
   {
     id: "pep-melanotan2",
     name: "melanotan 2",
-    priceRange: "$155.00 – $6,000.00",
+    priceRange: "$155.00 â€“ $6,000.00",
     image: "./src/assets/images/melanotan2_best_1780031120375.png"
   },
   {
     id: "pep-epitalon",
     name: "Epithalon",
-    priceRange: "$95.00 – $12,900.00",
+    priceRange: "$95.00 â€“ $12,900.00",
     image: "./src/assets/images/epithalon_best_1780031139756.png"
   }
 ];
@@ -177,7 +177,7 @@ export default function App() {
         userName: "Dr. Matthew Evans",
         shippingAddress: {
           street: "Geneva Scientifique Avenue 14",
-          city: "Zürich",
+          city: "ZÃ¼rich",
           state: "ZH",
           postalCode: "8001",
           country: "Switzerland"
@@ -552,7 +552,7 @@ ${shippingString}
               }}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-950 font-sans text-base font-bold cursor-pointer"
             >
-              ×
+              Ã—
             </button>
             
             <div className="text-center font-sans pb-1">
@@ -599,7 +599,7 @@ ${shippingString}
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 className="w-full bg-gray-50 border border-gray-200 p-2.5 font-sans focus:outline-none focus:border-[#DE5246] rounded-xl text-xs"
-                placeholder="••••••••"
+                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               />
             </div>
 
@@ -670,6 +670,7 @@ ${shippingString}
 
       {/* Main Views Layout Switch */}
       <main className="flex-1">
+        <Suspense fallback={<div className="flex min-h-[70vh] items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#DE5246]"></div></div>}>
         {/* Cart added notification banner - exact replica of the user mockup */}
         {cartNotification && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 select-none animate-fade-in">
@@ -785,7 +786,7 @@ ${shippingString}
                   {checkoutSuccessOrder.items.map((item, index) => (
                     <div key={item.productId || index} className="grid grid-cols-12 px-5 py-3.5 leading-relaxed">
                       <span className="col-span-8 text-left font-normal">
-                        {item.name} <span className="text-gray-900 font-bold mx-0.5">×</span> <span className="font-bold text-gray-950">{item.quantity}</span>
+                        {item.name} <span className="text-gray-900 font-bold mx-0.5">Ã—</span> <span className="font-bold text-gray-950">{item.quantity}</span>
                       </span>
                       <span className="col-span-4 text-right font-normal">
                         ${(item.priceAtPurchase * item.quantity).toFixed(2)}
@@ -847,13 +848,13 @@ ${shippingString}
                   
                   {checkoutSuccessOrder.phone && (
                     <p className="flex items-center gap-2 text-gray-650 pt-1 font-mono">
-                      <span>📞</span>
+                      <span>ðŸ“ž</span>
                       <span>{checkoutSuccessOrder.phone}</span>
                     </p>
                   )}
                   {checkoutSuccessOrder.userEmail && (
                     <p className="flex items-center gap-2 text-gray-650 pt-0.5 font-sans">
-                      <span>✉</span>
+                      <span>âœ‰</span>
                       <span>{checkoutSuccessOrder.userEmail}</span>
                     </p>
                   )}
@@ -1203,7 +1204,7 @@ ${shippingString}
                       </h2>
 
                       <p style={{ fontSize: '14px' }} className="text-gray-500 font-sans leading-relaxed font-medium max-w-3xl mx-auto">
-                        At Swiss Peptides, we are dedicated to providing the highest quality peptides to help you achieve your health and fitness goals. Whether you’re looking for muscle-building peptides, weight loss solutions, or performance enhancers, In addition, we offer a wide range of premium products sourced from trusted manufacturers. With fast shipping across Switzerland and a commitment to excellence, we make it easy to access the best peptides online. Trust us to support your journey toward better health and performance.
+                        At Swiss Peptides, we are dedicated to providing the highest quality peptides to help you achieve your health and fitness goals. Whether youâ€™re looking for muscle-building peptides, weight loss solutions, or performance enhancers, In addition, we offer a wide range of premium products sourced from trusted manufacturers. With fast shipping across Switzerland and a commitment to excellence, we make it easy to access the best peptides online. Trust us to support your journey toward better health and performance.
                       </p>
 
                       <div className="pt-6">
@@ -1328,7 +1329,7 @@ ${shippingString}
                           </div>
                           <div className="space-y-2 text-center sm:text-left">
                             <h3 style={{ fontSize: '20px' }} className="font-montserrat font-black leading-tight text-[#071F3F] uppercase tracking-wider">
-                              GHK – CU
+                              GHK â€“ CU
                             </h3>
                             <p style={{ fontSize: '14px' }} className="text-[#071F3F]/85 font-sans leading-relaxed">
                               We offer Ghk Cu in different concentrations. our delivery is discreet and secure.
@@ -1505,6 +1506,7 @@ ${shippingString}
             )}
           </>
         )}
+        </Suspense>
       </main>
 
       {/* Custom styled Swiss Peptides Footer (Exact image replica layout) */}
@@ -1537,6 +1539,7 @@ ${shippingString}
                 <li><button onClick={() => { setActivePage('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">About</button></li>
                 <li><button onClick={() => { setActivePage('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Contact</button></li>
                 <li><button onClick={() => { setActivePage('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Shop</button></li>
+                <li><button onClick={() => { setActivePage('articles'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Articles</button></li>
                 <li><button onClick={() => { setActivePage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Cart</button></li>
                 <li><button onClick={() => { setActivePage('checkout'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Checkout</button></li>
                 <li><button onClick={() => { setActivePage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">My account</button></li>
@@ -1571,7 +1574,7 @@ ${shippingString}
 
           {/* Bottom Copyright and Powered strip */}
           <div className="border-t border-gray-800/80 mt-16 pt-8 flex flex-col sm:flex-row justify-between items-center text-gray-400 gap-4">
-            <div style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }}>Copyright © 2026 Buy Swiss Peptides</div>
+            <div style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }}>Copyright Â© 2026 Buy Swiss Peptides</div>
             <div style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }}>Powered by Buy Swiss Peptides</div>
           </div>
         </div>
@@ -1582,3 +1585,4 @@ ${shippingString}
     </div>
   );
 }
+
