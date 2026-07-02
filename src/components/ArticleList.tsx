@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Article } from '../types';
-import { Helmet } from 'react-helmet-async';
 import { BookOpen } from 'lucide-react';
 
 interface ArticleListProps {
@@ -9,14 +8,17 @@ interface ArticleListProps {
 }
 
 export default function ArticleList({ articles, onArticleClick }: ArticleListProps) {
+  useEffect(() => {
+    document.title = "Learn About Peptides | Knowledge Base";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "Explore our knowledge base to learn about research peptides, pentadecapeptide, and proteins related to peptides.");
+    
+    let metaKey = document.querySelector('meta[name="keywords"]');
+    if (metaKey) metaKey.setAttribute("content", "peptides, research peptides, pentadecapeptide, protein related to peptides");
+  }, []);
+
   return (
     <div className="bg-[#F8F9FA] min-h-screen py-16 font-sans text-gray-800">
-      <Helmet>
-        <title>Learn About Peptides | Knowledge Base</title>
-        <meta name="description" content="Explore our knowledge base to learn about research peptides, pentadecapeptide, and proteins related to peptides." />
-        <meta name="keywords" content="peptides, research peptides, pentadecapeptide, protein related to peptides" />
-      </Helmet>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-extrabold text-[#0C1B2D] tracking-tight uppercase mb-4">
