@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Article } from '../types';
-import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
 
 interface ArticleDetailProps {
@@ -11,34 +10,46 @@ interface ArticleDetailProps {
 export default function ArticleDetail({ article, onBack }: ArticleDetailProps) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Update SEO dynamically
+    document.title = `${article.title} | Knowledge Base`;
+    
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", article.excerpt);
+    
+    let metaKey = document.querySelector('meta[name="keywords"]');
+    if (metaKey) metaKey.setAttribute("content", article.tags.join(', '));
+
+    // Inject JSON-LD Schema
+    const scriptId = 'article-schema-jsonld';
+    let script = document.getElementById(scriptId);
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": article.title,
+      "image": [`https://buyswisspetides.shop${article.imageUrl.replace('.', '')}`],
+      "datePublished": article.publishDate,
+      "author": [{
+        "@type": "Person",
+        "name": article.author
+      }],
+      "description": article.excerpt
+    });
+
+    return () => {
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) existingScript.remove();
+    };
   }, [article.id]);
 
   return (
     <div className="bg-white min-h-screen pb-24 font-sans text-gray-800">
-      <Helmet>
-        <title>{article.title} | Knowledge Base</title>
-        <meta name="description" content={article.excerpt} />
-        <meta name="keywords" content={article.tags.join(', ')} />
-        
-        {/* JSON-LD Schema for Article */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": article.title,
-            "image": [
-              `https://buyswisspetides.shop${article.imageUrl.replace('.', '')}`
-            ],
-            "datePublished": article.publishDate,
-            "author": [{
-              "@type": "Person",
-              "name": article.author
-            }],
-            "description": article.excerpt
-          })}
-        </script>
-      </Helmet>
-
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
         <button 
           onClick={onBack}
