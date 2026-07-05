@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CartItem, Order, UserProfile } from '../types';
+import { trackPurchase } from '../utils/analytics';
 import { ArrowLeft, User } from 'lucide-react';
 
 const countriesList = [
@@ -131,6 +132,9 @@ export default function CheckoutForm({
     };
 
     onOrderCompleted(newOrder);
+
+    // Fire GA4 Purchase Event
+    trackPurchase(newOrder);
   };
 
   if (cart.length === 0) {
@@ -204,7 +208,7 @@ export default function CheckoutForm({
             <div className="py-4 flex flex-col justify-between flex-grow space-y-3.5 text-left">
               <div className="space-y-1">
                 <h3 className="text-sm text-gray-800 font-sans font-medium tracking-tight">Mounjaro</h3>
-                <p className="text-xs font-bold text-gray-500 font-mono pt-0.5">$180.00 – $320.00</p>
+                <p className="text-xs font-bold text-gray-500 font-mono pt-0.5">$180.00 â€“ $320.00</p>
               </div>
               <button 
                 onClick={onBackToCatalog}
@@ -228,7 +232,7 @@ export default function CheckoutForm({
             <div className="py-4 flex flex-col justify-between flex-grow space-y-3.5 text-left">
               <div className="space-y-1">
                 <h3 className="text-sm text-gray-800 font-sans font-medium tracking-tight">Wegovy</h3>
-                <p className="text-xs font-bold text-gray-500 font-mono pt-0.5">$205.00 – $410.00</p>
+                <p className="text-xs font-bold text-gray-500 font-mono pt-0.5">$205.00 â€“ $410.00</p>
               </div>
               <button 
                 onClick={onBackToCatalog}
@@ -252,7 +256,7 @@ export default function CheckoutForm({
             <div className="py-4 flex flex-col justify-between flex-grow space-y-3.5 text-left">
               <div className="space-y-1">
                 <h3 className="text-sm text-gray-800 font-sans font-medium tracking-tight">Cagrilintide + Semaglutide</h3>
-                <p className="text-xs font-bold text-gray-500 font-mono pt-0.5">$204.00 – $13,900.00</p>
+                <p className="text-xs font-bold text-gray-500 font-mono pt-0.5">$204.00 â€“ $13,900.00</p>
                 <div className="flex items-center gap-0.5 pt-1">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20">
@@ -448,10 +452,10 @@ export default function CheckoutForm({
                       <option value="Fribourg">Fribourg</option>
                       <option value="Geneva">Geneva</option>
                       <option value="Glarus">Glarus</option>
-                      <option value="Graubünden">Graubünden</option>
+                      <option value="GraubÃ¼nden">GraubÃ¼nden</option>
                       <option value="Jura">Jura</option>
                       <option value="Lucerne">Lucerne</option>
-                      <option value="Neuchâtel">Neuchâtel</option>
+                      <option value="NeuchÃ¢tel">NeuchÃ¢tel</option>
                       <option value="Nidwalden">Nidwalden</option>
                       <option value="Obwalden">Obwalden</option>
                       <option value="Schaffhausen">Schaffhausen</option>
@@ -464,7 +468,7 @@ export default function CheckoutForm({
                       <option value="Valais">Valais</option>
                       <option value="Vaud">Vaud</option>
                       <option value="Zug">Zug</option>
-                      <option value="Zürich">Zürich</option>
+                      <option value="ZÃ¼rich">ZÃ¼rich</option>
                     </select>
                   </div>
                 </div>
@@ -526,19 +530,19 @@ export default function CheckoutForm({
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <div className="flex items-center gap-1 bg-white border border-gray-200 rounded px-1.5 py-0.5 text-[9px] font-bold font-mono tracking-wider select-none shadow-3xs uppercase">
-                        <span className="text-emerald-500 font-extrabold font-sans">₮</span>
+                        <span className="text-emerald-500 font-extrabold font-sans">â‚®</span>
                         <span>USDT</span>
                       </div>
                       <div className="flex items-center gap-1 bg-white border border-gray-200 rounded px-1.5 py-0.5 text-[9px] font-bold font-mono tracking-wider select-none shadow-3xs uppercase">
-                        <span className="text-amber-500 font-extrabold">₿</span>
+                        <span className="text-amber-500 font-extrabold">â‚¿</span>
                         <span>BTC</span>
                       </div>
                       <div className="flex items-center gap-1 bg-white border border-gray-200 rounded px-1.5 py-0.5 text-[9px] font-bold font-mono tracking-wider select-none shadow-3xs uppercase">
-                        <span className="text-indigo-500 font-extrabold">Ξ</span>
+                        <span className="text-indigo-500 font-extrabold">Îž</span>
                         <span>ETH</span>
                       </div>
                       <div className="flex items-center gap-1 bg-white border border-gray-200 rounded px-1.5 py-0.5 text-[9px] font-bold font-mono tracking-wider select-none shadow-3xs uppercase">
-                        <span className="text-yellow-600 font-sans font-extrabold">▶</span>
+                        <span className="text-yellow-600 font-sans font-extrabold">â–¶</span>
                         <span>Binance Pay</span>
                       </div>
                       <span className="text-xs text-gray-500 font-semibold font-mono pl-1">USDT,BTC,ETH,Binance Pay</span>
@@ -710,7 +714,7 @@ export default function CheckoutForm({
                 <p className="text-[10px] text-red-500 font-mono mt-1">{couponError}</p>
               )}
               {appliedDiscount > 0 && (
-                <p className="text-[10px] text-emerald-600 font-mono font-bold mt-1">✓ SWISS10 applied (10% discount on chemical compounds)</p>
+                <p className="text-[10px] text-emerald-600 font-mono font-bold mt-1">âœ“ SWISS10 applied (10% discount on chemical compounds)</p>
               )}
             </div>
 
