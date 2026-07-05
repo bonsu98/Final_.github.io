@@ -258,7 +258,7 @@ export default function ProductDetail({
             <div className="w-full relative overflow-hidden select-none">
               {selectedMedia === 'vial' && (
                 <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-300">
-                  <img loading=" lazy\ 
+                  <img loading="lazy" 
                     src={product.thumbnailVial || product.imageUrl} 
                     alt={product.name} 
                     className="max-h-full max-w-full object-contain rounded-none select-none border-0 shadow-none outline-none"
@@ -270,7 +270,7 @@ export default function ProductDetail({
               {selectedMedia === 'certificate' && (
                 product.thumbnailCert ? (
                   <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-350">
-                    <img loading=" lazy\ 
+                    <img loading="lazy" 
                       src={product.thumbnailCert} 
                       alt="Peptide Analysis Certificate" 
                       className="max-h-full max-w-full object-contain rounded-lg select-none"
@@ -328,7 +328,7 @@ export default function ProductDetail({
               {selectedMedia === 'chromatogram' && (
                 product.thumbnailChrom ? (
                   <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-350">
-                    <img loading=" lazy\ 
+                    <img loading="lazy" 
                       src={product.thumbnailChrom} 
                       alt="Peptide Analysis Chromatogram" 
                       className="max-h-full max-w-full object-contain rounded-lg select-none"
@@ -413,7 +413,7 @@ export default function ProductDetail({
               {selectedMedia === 'massspec' && (
                 product.thumbnailMass ? (
                   <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-350">
-                    <img loading=" lazy\ 
+                    <img loading="lazy" 
                       src={product.thumbnailMass} 
                       alt="Peptide Analysis Mass Spectrometry" 
                       className="max-h-full max-w-full object-contain rounded-lg select-none"
@@ -470,7 +470,7 @@ export default function ProductDetail({
                   selectedMedia === 'vial' ? 'border-[#DE5246]' : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
-                <img loading=" lazy\ 
+                <img loading="lazy" 
                   src={product.imageUrl} 
                   alt="peptide vial" 
                   className="w-full h-full object-cover rounded-md"
@@ -964,7 +964,7 @@ export default function ProductDetail({
                   onClick={() => onProductClick?.(p)}
                   className="aspect-square w-full bg-[#FAF9F5] rounded-none overflow-hidden flex items-center justify-center hover:scale-[1.01] hover:shadow-xs transition-all duration-350 cursor-pointer mb-3"
                 >
-                  <img loading=" lazy\ 
+                  <img loading="lazy" 
                     src={p.imageUrl} 
                     alt={p.name} 
                     className="w-full h-full object-cover rounded-none select-none"
