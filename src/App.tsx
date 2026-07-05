@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { PageView, CartItem, Product, Order, UserProfile, COABatch, Article } from './types';
+import { trackAddToCart, trackBeginCheckout } from './utils/analytics';
 import Header from './components/Header';
 import Hero from './components/Hero';
 const ShopCatalog = lazy(() => import('./components/ShopCatalog'));
@@ -280,6 +281,10 @@ export default function App() {
         return [...prev, { product: targetProduct, quantity }];
       }
     });
+    
+    // Fire GA4 Add to Cart event
+    trackAddToCart(product, quantity, customPrice);
+    
     setCartNotification({ productName: product.name });
     // Scroll smoothly to top so the notification is visible right away
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -307,7 +312,10 @@ export default function App() {
   };
 
   const handleCheckoutClick = () => {
+    setCartOpen(false);
+    trackBeginCheckout(cart);
     setActivePage('checkout');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOrderCompleted = (completedOrder: Order) => {
@@ -1461,7 +1469,7 @@ ${shippingString}
                 cart={cart}
                 onUpdateQuantity={handleUpdateQuantity}
                 onRemoveItem={handleRemoveItem}
-                onCheckoutClick={() => setActivePage('checkout')}
+                onCheckoutClick={handleCheckoutClick}
                 onBackToCatalog={() => setActivePage('shop')}
               />
             )}
@@ -1541,7 +1549,7 @@ ${shippingString}
                 <li><button onClick={() => { setActivePage('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Shop</button></li>
                 <li><button onClick={() => { setActivePage('articles'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Articles</button></li>
                 <li><button onClick={() => { setActivePage('cart'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Cart</button></li>
-                <li><button onClick={() => { setActivePage('checkout'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Checkout</button></li>
+                <li><button onClick={handleCheckoutClick} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">Checkout</button></li>
                 <li><button onClick={() => { setActivePage('account'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ fontFamily: '"Montserrat", sans-serif', fontSize: '15px' }} className="hover:text-[#DE5246] transition-colors cursor-pointer block text-left">My account</button></li>
               </ul>
             </div>
