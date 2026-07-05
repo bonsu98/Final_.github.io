@@ -173,7 +173,7 @@ export default function ShopCatalog({
                   onClick={() => onProductClick(product)}
                   className="aspect-square bg-[#fbfbfa] relative border border-gray-100 rounded-lg overflow-hidden cursor-pointer flex items-center justify-center hover:opacity-95 transition-all shadow-3xs"
                 >
-                  <img loading=" lazy\
+                  <img loading="lazy"
                     src={product.imageUrl}
                     alt={product.name}
                     referrerPolicy="no-referrer"
