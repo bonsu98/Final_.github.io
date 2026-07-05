@@ -90,16 +90,6 @@ export default function Header({
               </button>
 
               <button
-                onClick={() => setActivePage('articles')}
-                style={navLinkStyle}
-                className={`transition-colors cursor-pointer hover:text-[#DE5246] ${
-                  activePage === 'articles' || activePage === 'article-detail' ? 'text-[#DE5246]' : 'text-gray-700'
-                }`}
-              >
-                Articles
-              </button>
-
-              <button
                 onClick={() => setActivePage('contact')}
                 style={navLinkStyle}
                 className={`transition-colors cursor-pointer hover:text-[#DE5246] ${
@@ -180,7 +170,7 @@ export default function Header({
                       className="text-[9px] font-mono uppercase tracking-wider text-gray-500 hover:text-[#DE5246] cursor-pointer max-w-[80px] sm:max-w-[120px] truncate"
                       title="View My Account"
                     >
-                      👤 {currentUser.name.length > 10 ? `${currentUser.name.substring(0, 8)}..` : currentUser.name}
+                      ðŸ‘¤ {currentUser.name.length > 10 ? `${currentUser.name.substring(0, 8)}..` : currentUser.name}
                     </button>
                     <span className="text-gray-300 text-[10px]">|</span>
                     <button
