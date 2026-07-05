@@ -997,7 +997,7 @@ ${shippingString}
                               }}
                               className="w-full aspect-square bg-[#F5F5F7] overflow-hidden cursor-pointer shadow-xs border border-gray-100 hover:border-gray-300 transition-all rounded-xs"
                             >
-                              <img loading=" lazy\ 
+                              <img loading="lazy" 
                                 src={item.image} 
                                 alt={item.name}
                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -1063,7 +1063,7 @@ ${shippingString}
                       
                       {/* Left: Beautiful clinical photo generated based on mockup */}
                       <div className="md:col-span-5 w-full overflow-hidden">
-                        <img loading=" lazy\ 
+                        <img loading="lazy" 
                           src="./src/assets/images/peptides_info_vials_1780003530034.png" 
                           alt="Premium research peptide vials with sterile syringes" 
                           referrerPolicy="no-referrer"
@@ -1308,7 +1308,7 @@ ${shippingString}
                         {/* Item 1 - Tirzepatide Swiss Price */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-5">
                           <div className="w-40 h-40 bg-white shadow-xs overflow-hidden shrink-0">
-                            <img loading=" lazy\ 
+                            <img loading="lazy" 
                               src="./src/assets/images/peptides_info_vials_1780003530034.png" 
                               alt="Tirzepatide Swiss Price"
                               className="w-full h-full object-cover"
@@ -1328,7 +1328,7 @@ ${shippingString}
                         {/* Item 2 - GHK - CU */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-5">
                           <div className="w-40 h-40 bg-white shadow-xs overflow-hidden shrink-0">
-                            <img loading=" lazy\ 
+                            <img loading="lazy" 
                               src="./src/assets/images/ghk_cu_best_1780031016475.png" 
                               alt="GHK - CU"
                               className="w-full h-full object-cover"
@@ -1348,7 +1348,7 @@ ${shippingString}
                         {/* Item 3 - Retatrutide Price */}
                         <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-5">
                           <div className="w-40 h-40 bg-white shadow-xs overflow-hidden shrink-0">
-                            <img loading=" lazy\ 
+                            <img loading="lazy" 
                               src="./src/assets/images/retatrutide_best_1780030958269.png" 
                               alt="Retatrutide Price"
                               className="w-full h-full object-cover"
