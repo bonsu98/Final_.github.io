@@ -33,7 +33,7 @@ export default function ArticleDetail({ article, onBack }: ArticleDetailProps) {
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": article.title,
-      "image": [`https://buyswisspetides.shop${article.imageUrl.replace('.', '')}`],
+      "image": [`https://buyswisspeptides.shop${article.imageUrl.replace('.', '')}`],
       "datePublished": article.publishDate,
       "author": [{
         "@type": "Person",
