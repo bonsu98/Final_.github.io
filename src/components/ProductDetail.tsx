@@ -258,7 +258,7 @@ export default function ProductDetail({
             <div className="w-full relative overflow-hidden select-none">
               {selectedMedia === 'vial' && (
                 <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-300">
-                  <img 
+                  <img loading=" lazy\ 
                     src={product.thumbnailVial || product.imageUrl} 
                     alt={product.name} 
                     className="max-h-full max-w-full object-contain rounded-none select-none border-0 shadow-none outline-none"
@@ -270,7 +270,7 @@ export default function ProductDetail({
               {selectedMedia === 'certificate' && (
                 product.thumbnailCert ? (
                   <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-350">
-                    <img 
+                    <img loading=" lazy\ 
                       src={product.thumbnailCert} 
                       alt="Peptide Analysis Certificate" 
                       className="max-h-full max-w-full object-contain rounded-lg select-none"
@@ -286,7 +286,7 @@ export default function ProductDetail({
                           <h2 className="text-sm font-extrabold uppercase font-sans text-slate-900 mt-0.5">{product.name} HPLC TESTED</h2>
                         </div>
                         <div className="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full text-[9px] font-bold font-mono tracking-wider flex items-center gap-1 border border-emerald-100">
-                          <span>✓ VERIFIED</span>
+                          <span>âœ“ VERIFIED</span>
                         </div>
                       </div>
 
@@ -328,7 +328,7 @@ export default function ProductDetail({
               {selectedMedia === 'chromatogram' && (
                 product.thumbnailChrom ? (
                   <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-350">
-                    <img 
+                    <img loading=" lazy\ 
                       src={product.thumbnailChrom} 
                       alt="Peptide Analysis Chromatogram" 
                       className="max-h-full max-w-full object-contain rounded-lg select-none"
@@ -402,7 +402,7 @@ export default function ProductDetail({
                         <div className="col-span-1 border-r border-gray-200 text-[9px] text-gray-400 font-mono">ity</div>
                         <div className="col-span-5 border-r border-gray-150 text-gray-700 font-mono">HPLC-UV/VIS</div>
                         <div className="col-span-6 text-emerald-600 font-bold font-mono text-[10px]">
-                          {matchingCOA.productId === product.id ? `>${matchingCOA.purity} ± 0.18%` : `>${product.purity} ± 0.18%`}
+                          {matchingCOA.productId === product.id ? `>${matchingCOA.purity} Â± 0.18%` : `>${product.purity} Â± 0.18%`}
                         </div>
                       </div>
                     </div>
@@ -413,7 +413,7 @@ export default function ProductDetail({
               {selectedMedia === 'massspec' && (
                 product.thumbnailMass ? (
                   <div className="w-full flex items-center justify-center bg-transparent rounded-none overflow-hidden h-[450px] p-0 transition-all duration-350">
-                    <img 
+                    <img loading=" lazy\ 
                       src={product.thumbnailMass} 
                       alt="Peptide Analysis Mass Spectrometry" 
                       className="max-h-full max-w-full object-contain rounded-lg select-none"
@@ -470,7 +470,7 @@ export default function ProductDetail({
                   selectedMedia === 'vial' ? 'border-[#DE5246]' : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
-                <img 
+                <img loading=" lazy\ 
                   src={product.imageUrl} 
                   alt="peptide vial" 
                   className="w-full h-full object-cover rounded-md"
@@ -504,7 +504,7 @@ export default function ProductDetail({
               >
                 <div className="text-[7px] font-mono text-gray-400 uppercase leading-tight border-b pb-1 text-center font-bold">CHROMATOGRAM</div>
                 <div className="relative h-6 bg-slate-50/50 rounded-xs border flex items-center justify-center">
-                  <span className="text-[8px] font-sans text-blue-500 font-bold select-none font-bold">📊</span>
+                  <span className="text-[8px] font-sans text-blue-500 font-bold select-none font-bold">ðŸ“Š</span>
                 </div>
                 <div className="text-[7px] font-bold text-gray-500 text-right font-mono font-bold">Page 1</div>
                </div>
@@ -579,7 +579,7 @@ export default function ProductDetail({
                   {selectedDosage && selectedVialCount ? (
                     <span>${calculatedLineTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                   ) : (
-                    <span>{product.priceRange || "$95.00 – $42,000.00"}</span>
+                    <span>{product.priceRange || "$95.00 â€“ $42,000.00"}</span>
                   )}
                 </div>
                 
@@ -613,7 +613,7 @@ export default function ProductDetail({
                       <option value="20mg">20mg</option>
                     </select>
                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400 text-xs">
-                      ▼
+                      â–¼
                     </div>
                   </div>
                 </div>
@@ -639,7 +639,7 @@ export default function ProductDetail({
                       <option value="100 Vials">100 Vials (45% Discount)</option>
                     </select>
                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400 text-xs">
-                      ▼
+                      â–¼
                     </div>
                   </div>
                 </div>
@@ -825,8 +825,8 @@ export default function ProductDetail({
                       <div className="flex items-center gap-2">
                         <span className="font-extrabold text-slate-800">{rev.user}</span>
                         <div className="flex text-amber-550 text-[14.5px]">
-                          {Array.from({ length: rev.rating }).map((_, i) => <span key={i}>★</span>)}
-                          {Array.from({ length: 5 - rev.rating }).map((_, i) => <span key={i} className="text-gray-200">★</span>)}
+                          {Array.from({ length: rev.rating }).map((_, i) => <span key={i}>â˜…</span>)}
+                          {Array.from({ length: 5 - rev.rating }).map((_, i) => <span key={i} className="text-gray-200">â˜…</span>)}
                         </div>
                       </div>
                       <span className="text-[10px] font-mono text-gray-400">{rev.date}</span>
@@ -859,7 +859,7 @@ export default function ProductDetail({
                           style={{ color: '#E57B70' }}
                           title={`${starVal} Star${starVal > 1 ? 's' : ''}`}
                         >
-                          {formRating >= starVal ? '★' : '☆'}
+                          {formRating >= starVal ? 'â˜…' : 'â˜†'}
                         </button>
                       ))}
                     </div>
@@ -925,7 +925,7 @@ export default function ProductDetail({
                   {/* Success Alert */}
                   {formSubmitSuccess && (
                      <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg p-3 text-xs font-semibold animate-fade-in flex items-center gap-1.5">
-                       <span>✓</span> Review submitted successfully! Thank you for your feedback.
+                       <span>âœ“</span> Review submitted successfully! Thank you for your feedback.
                      </div>
                   )}
 
@@ -964,7 +964,7 @@ export default function ProductDetail({
                   onClick={() => onProductClick?.(p)}
                   className="aspect-square w-full bg-[#FAF9F5] rounded-none overflow-hidden flex items-center justify-center hover:scale-[1.01] hover:shadow-xs transition-all duration-350 cursor-pointer mb-3"
                 >
-                  <img 
+                  <img loading=" lazy\ 
                     src={p.imageUrl} 
                     alt={p.name} 
                     className="w-full h-full object-cover rounded-none select-none"
