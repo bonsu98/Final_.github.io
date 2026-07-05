@@ -122,7 +122,7 @@ export default function ShopCatalog({
         {/* Toolbar row with items count and default sorting selector */}
         <div className="flex flex-row justify-between items-center py-4 border-b border-gray-100 mb-8 text-[11px] text-gray-500 font-sans">
           <div className="select-none text-gray-400">
-            Showing {sortedProducts.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}–
+            Showing {sortedProducts.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}â€“
             {Math.min(currentPage * itemsPerPage, sortedProducts.length)} of {sortedProducts.length} results
           </div>
           
@@ -132,7 +132,7 @@ export default function ShopCatalog({
               className="bg-transparent pr-4 pl-2 py-1 text-right text-gray-500 font-sans font-semibold text-[13.5px] focus:outline-none cursor-pointer hover:text-[#DE5246] transition-colors flex items-center gap-1.5"
             >
               <span>{currentOption.label}</span>
-              <span className="text-[7.5px] text-gray-400">▼</span>
+              <span className="text-[7.5px] text-gray-400">â–¼</span>
             </button>
 
             {dropdownOpen && (
@@ -173,7 +173,7 @@ export default function ShopCatalog({
                   onClick={() => onProductClick(product)}
                   className="aspect-square bg-[#fbfbfa] relative border border-gray-100 rounded-lg overflow-hidden cursor-pointer flex items-center justify-center hover:opacity-95 transition-all shadow-3xs"
                 >
-                  <img
+                  <img loading=" lazy\
                     src={product.imageUrl}
                     alt={product.name}
                     referrerPolicy="no-referrer"
@@ -196,7 +196,7 @@ export default function ShopCatalog({
  
                   {/* Rating Stars - 5 customized golden stars */}
                   <div className="flex text-amber-500 text-[15.5px] gap-0.5 select-none pt-0.5">
-                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    <span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span>
                   </div>
  
                   {/* Custom Price Range or Single Price */}
@@ -242,7 +242,7 @@ export default function ShopCatalog({
                 onClick={() => handlePageChange(currentPage + 1)}
                 className="w-8 h-8 flex items-center justify-center bg-white text-gray-500 border border-gray-200 rounded-md hover:border-[#0C1B2D] hover:text-[#0C1B2D] font-bold text-[11px] transition-colors cursor-pointer"
               >
-                →
+                â†’
               </button>
             )}
           </div>
