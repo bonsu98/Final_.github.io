@@ -18,6 +18,7 @@ const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const RefundPolicy = lazy(() => import('./components/RefundPolicy'));
 const ArticleList = lazy(() => import('./components/ArticleList'));
 const ArticleDetail = lazy(() => import('./components/ArticleDetail'));
+const SeoLandingPage = lazy(() => import('./components/SeoLandingPage'));
 import ChatWidget from './components/ChatWidget';
 import { PRODUCTS, MOCK_COAS, ARTICLES } from './mockData';
 import { CheckCircle, Check } from 'lucide-react';
@@ -1488,6 +1489,17 @@ ${shippingString}
               <ArticleDetail 
                 article={selectedArticle} 
                 onBack={() => setActivePage('articles')} 
+              />
+            )}
+
+            {activePage === 'seo-landing' && (
+              <SeoLandingPage 
+                products={products}
+                onBack={() => setActivePage('home')}
+                onProductClick={(p) => {
+                  setSelectedProduct(p);
+                  setActivePage('product-detail');
+                }}
               />
             )}
 
