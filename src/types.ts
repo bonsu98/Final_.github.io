@@ -101,4 +101,4 @@ export interface Article {
   tags: string[];
 }
 
-export type PageView = 'home' | 'shop' | 'coas' | 'account' | 'docs' | 'about' | 'checkout' | 'admin' | 'contact' | 'product-detail' | 'cart' | 'privacy' | 'articles' | 'article-detail';
+export type PageView = 'home' | 'shop' | 'coas' | 'account' | 'docs' | 'about' | 'checkout' | 'admin' | 'contact' | 'product-detail' | 'cart' | 'privacy' | 'articles' | 'article-detail' | 'seo-landing';
