@@ -79,15 +79,31 @@ export default function Header({
                 peptides
               </button>
 
-              <button
-                onClick={() => setActivePage('about')}
-                style={navLinkStyle}
-                className={`transition-colors cursor-pointer hover:text-[#DE5246] ${
-                  activePage === 'about' ? 'text-[#DE5246]' : 'text-gray-700'
-                }`}
-              >
-                About
-              </button>
+              <div className="relative group">
+                <button
+                  onClick={() => setActivePage('about')}
+                  style={navLinkStyle}
+                  className={`transition-colors cursor-pointer hover:text-[#DE5246] py-2 ${
+                    activePage === 'about' || activePage === 'seo-landing' ? 'text-[#DE5246]' : 'text-gray-700'
+                  }`}
+                >
+                  About
+                </button>
+                <div className="absolute top-full left-0 w-48 bg-white border border-gray-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                  <button
+                    onClick={() => setActivePage('about')}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#DE5246] cursor-pointer"
+                  >
+                    About Us
+                  </button>
+                  <button
+                    onClick={() => setActivePage('seo-landing')}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#DE5246] cursor-pointer"
+                  >
+                    Peptide Guide
+                  </button>
+                </div>
+              </div>
 
               <button
                 onClick={() => setActivePage('contact')}
