@@ -23,66 +23,69 @@ import ChatWidget from './components/ChatWidget';
 import { PRODUCTS, MOCK_COAS, ARTICLES } from './mockData';
 import { CheckCircle, Check } from 'lucide-react';
 
+const imageMap = import.meta.glob('./assets/images/*.png', { eager: true, import: 'default' }) as Record<string, string>;
+
+
 const BEST_SELLERS = [
   {
     id: "pep-retatrutide",
     name: "Retatrutide",
     priceRange: "$95.00 â€“ $42,000.00",
-    image: "./src/assets/images/retatrutide_best_1780030958269.png"
+    image: imageMap['./assets/images/retatrutide_best_1780030958269.png']
   },
   {
     id: "pep-mots-c",
     name: "MOTS-C",
     priceRange: "$99.00 â€“ $21,400.00",
-    image: "./src/assets/images/mots_c_best_1780030979501.png"
+    image: imageMap['./assets/images/mots_c_best_1780030979501.png']
   },
   {
     id: "pep-hgh-191aa",
     name: "HGH 191 AA 97%",
     priceRange: "$113.00 â€“ $10,300.00",
-    image: "./src/assets/images/hgh_191_best_1780030996215.png"
+    image: imageMap['./assets/images/hgh_191_best_1780030996215.png']
   },
   {
     id: "pep-ghk-cu",
     name: "GHK-CU",
     priceRange: "$103.00 â€“ $8,000.00",
-    image: "./src/assets/images/ghk_cu_best_1780031016475.png"
+    image: imageMap['./assets/images/ghk_cu_best_1780031016475.png']
   },
   {
     id: "pep-tirzepatide",
     name: "Tirzepatide",
     priceRange: "$57.00 â€“ $25,700.00",
-    image: "./src/assets/images/tirzepatide_best_1780031041817.png"
+    image: imageMap['./assets/images/tirzepatide_best_1780031041817.png']
   },
   {
     id: "pep-bpc157-tb500",
     name: "BPC157 + TB500 Blend",
     priceRange: "$141.00 â€“ $18,200.00",
-    image: "./src/assets/images/bpc157_tb500_best_1780031064715.png"
+    image: imageMap['./assets/images/bpc157_tb500_best_1780031064715.png']
   },
   {
     id: "pep-nad-10ml",
     name: "NAD+ (10ML)",
     priceRange: "$182.00 â€“ $12,400.00",
-    image: "./src/assets/images/nad_10ml_best_1780031082396.png"
+    image: imageMap['./assets/images/nad_10ml_best_1780031082396.png']
   },
   {
     id: "pep-igf1-lr3",
     name: "IGF-1 LR3",
     priceRange: "$100.00 â€“ $16,700.00",
-    image: "./src/assets/images/igf1_lr3_best_1780031102244.png"
+    image: imageMap['./assets/images/igf1_lr3_best_1780031102244.png']
   },
   {
     id: "pep-melanotan2",
     name: "melanotan 2",
     priceRange: "$155.00 â€“ $6,000.00",
-    image: "./src/assets/images/melanotan2_best_1780031120375.png"
+    image: imageMap['./assets/images/melanotan2_best_1780031120375.png']
   },
   {
     id: "pep-epitalon",
     name: "Epithalon",
     priceRange: "$95.00 â€“ $12,900.00",
-    image: "./src/assets/images/epithalon_best_1780031139756.png"
+    image: imageMap['./assets/images/epithalon_best_1780031139756.png']
   }
 ];
 
@@ -1234,7 +1237,7 @@ ${shippingString}
                 <section 
                   className="relative min-h-[600px] md:min-h-[750px] flex items-center bg-black overflow-hidden bg-cover bg-center bg-scroll md:bg-fixed py-20"
                   style={{
-                    backgroundImage: "url('./src/assets/images/wegovy_pens_background_1780029483639.png')",
+                    backgroundImage: `url($)`,
                     backgroundColor: "#18181b", /* fallback solid background for instant mobile load */
                   }}
                 >
