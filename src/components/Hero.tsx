@@ -1,4 +1,5 @@
 import React from 'react';
+import heroImage from '../assets/images/peptide_vials_hero_1780001932117.png';
 
 interface HeroProps {
   onExploreClick: () => void;
@@ -13,7 +14,7 @@ export default function Hero({ onExploreClick, onVerifyClick, setActiveCategory 
       <div 
         className="relative min-h-[500px] md:min-h-[620px] flex items-center justify-center text-center px-4 py-20 bg-black overflow-hidden bg-cover bg-center bg-scroll md:bg-fixed"
         style={{
-          backgroundImage: "url('./src/assets/images/peptide_vials_hero_1780001932117.png')",
+          backgroundImage: `url(${heroImage})`,
         }}
       >
         {/* Dark translucent overlay for maximum readability and dramatic high contrast */}
