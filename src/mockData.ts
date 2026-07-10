@@ -466,8 +466,6 @@ export const MEMORANDUM_FAQS = [
 
 import { Article } from './types';
 
-const imageMap = import.meta.glob('./assets/images/*.png', { eager: true, import: 'default' }) as Record<string, string>;
-
 
 export const ARTICLES: Article[] = [
   {
