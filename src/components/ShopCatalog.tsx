@@ -196,7 +196,7 @@ export default function ShopCatalog({
  
                   {/* Rating Stars - 5 customized golden stars */}
                   <div className="flex text-amber-500 text-[15.5px] gap-0.5 select-none pt-0.5">
-                    <span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span><span>â˜…</span>
+                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
                   </div>
  
                   {/* Custom Price Range or Single Price */}
