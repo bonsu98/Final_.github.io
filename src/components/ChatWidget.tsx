@@ -9,7 +9,7 @@ export default function ChatWidget() {
 
   useEffect(() => {
     // Fetch configuration from localStorage
-    const storedWA = localStorage.getItem('peps_whatsapp_number') || '+61 488 856 783';
+    const storedWA = localStorage.getItem('peps_whatsapp_number') || '692907796';
     const storedTG = localStorage.getItem('peps_telegram_username') || 'BuySwissPeptide';
     
     setWhatsappNumber(storedWA);
@@ -29,7 +29,7 @@ export default function ChatWidget() {
   // Listen to localstorage updates in case they change in AdminPortal
   useEffect(() => {
     const handleStorageChange = () => {
-      const storedWA = localStorage.getItem('peps_whatsapp_number') || '+61 488 856 783';
+      const storedWA = localStorage.getItem('peps_whatsapp_number') || '692907796';
       const storedTG = localStorage.getItem('peps_telegram_username') || 'BuySwissPeptide';
       setWhatsappNumber(storedWA);
       setTelegramUsername(storedTG);
