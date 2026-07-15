@@ -28,8 +28,9 @@ export default function Hero({ onExploreClick, onVerifyClick, setActiveCategory 
           </h1>
 
           <h2 style={{ fontSize: '14px' }} className="text-white font-sans tracking-wide max-w-2xl mx-auto leading-relaxed drop-shadow-sm opacity-90 font-medium">
-            Looking To Buy Peptides? We Offer Top-Quality Peptides With Fast, Secure Shipping Across The Country. Shop Now For The Best In Health, Fitness, And Wellness!
+            Swiss-Engineered Peptides for Research and Personal Wellness. We offer 99.9%+ Purity, GMP-Compliant Peptides with Fast, Secure Shipping Across The Country. Shop Now For The Best In Health, Fitness, And Scientific Precision!
           </h2>
+
 
           <div className="pt-2">
             <button
