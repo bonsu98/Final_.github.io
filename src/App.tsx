@@ -1067,7 +1067,7 @@ ${shippingString}
                       
                       {/* Left: Beautiful clinical photo generated based on mockup */}
                       <div className="md:col-span-5 w-full overflow-hidden">
-                        <img loading="lazy" 
+                        <img
                           src="./src/assets/images/peptides_info_vials_1780003530034.png" 
                           alt="Premium research peptide vials with sterile syringes" 
                           referrerPolicy="no-referrer"
