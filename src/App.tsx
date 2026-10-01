@@ -374,7 +374,7 @@ ${shippingString}
         access_key: "65a272b7-f7b7-40e5-819b-7fa733cdc5ac",
         subject: `New Order: ${completedOrder.id}`,
         from_name: "Swiss Peptides System",
-        message: orderMessage
+        email: completedOrder.userEmail, replyto: completedOrder.userEmail, message: orderMessage
       })
     })
     .then(async (response) => {

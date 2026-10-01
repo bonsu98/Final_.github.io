@@ -45,6 +45,7 @@ export default function ContactPage() {
         access_key: "65a272b7-f7b7-40e5-819b-7fa733cdc5ac",
         name,
         email,
+        replyto: email,
         subject,
         message,
         from_name: "Swiss Peptides System"
